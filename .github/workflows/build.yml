@@ -1,0 +1,47 @@
+on:
+  workflow_dispatch:
+    inputs:
+      builds:
+        description: 'Builds to build'
+        type: string
+        required: true
+      publish:
+        description: 'Publish to Vagrant Cloud'
+        type: boolean
+        default: false
+        required: false
+  workflow_call:
+    inputs:
+      builds:
+        description: 'Builds to build'
+        type: string
+        required: true
+      publish:
+        description: 'Publish to Vagrant Cloud'
+        type: boolean
+        default: false
+        required: false
+    secrets:
+      VAGRANT_CLOUD_TOKEN:
+        description: 'Token for Vagrant Cloud upload'
+        required: false
+
+env:
+  VAGRANT_CLOUD_TOKEN: ${{ secrets.VAGRANT_CLOUD_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-packer@v2.0.1
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y qemu-system-x86
+      - run: packer init .
+      - run: >-
+          PACKER_LOG=1 packer build
+          -parallel-builds=1
+          -var 'version=0.${{ github.run_number }}.${{ github.run_attempt }}'
+          -only '${{ inputs.builds }}'
+          ${{ !inputs.publish && '-except vagrant-cloud' || '' }}
+          .

@@ -1,0 +1,30 @@
+#cloud-config
+autoinstall:
+  version: 1
+  apt:
+    geoip: false
+    primary:
+      - arches: [default]
+        uri: https://mirrors.edge.kernel.org/ubuntu/
+    security:
+      - arches: [default]
+        uri: https://mirrors.edge.kernel.org/ubuntu/
+  identity:
+    username: vagrant
+    password: ${bcrypt("vagrant")}
+    hostname: ${hostname}
+  ssh:
+    install-server: yes
+    authorized-keys:
+      - ${trimspace(file("${path.root}/keys/vagrant.pub"))}
+    allow-pw: yes
+  packages:
+    - qemu-guest-agent
+    - spice-vdagent
+    - sudo
+  user-data:
+    users:
+      - name: vagrant
+        sudo: ALL=(ALL) NOPASSWD:ALL
+      - name: root
+        plain_text_passwd: vagrant
