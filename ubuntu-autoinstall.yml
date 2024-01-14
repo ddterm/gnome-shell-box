@@ -21,7 +21,7 @@ autoinstall:
   packages:
     - qemu-guest-agent
     - spice-vdagent
-    - sudo
+    - spice-webdavd
   user-data:
     users:
       - name: vagrant

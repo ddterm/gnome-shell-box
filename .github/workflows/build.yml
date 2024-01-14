@@ -4,26 +4,17 @@ on:
       builds:
         description: 'Builds to build'
         type: string
-        required: true
+        required: false
+        default: >-
+          [
+            "ubuntu2310",
+            "fedora39",
+            "silverblue39"
+          ]
       publish:
         description: 'Publish to Vagrant Cloud'
         type: boolean
         default: false
-        required: false
-  workflow_call:
-    inputs:
-      builds:
-        description: 'Builds to build'
-        type: string
-        required: true
-      publish:
-        description: 'Publish to Vagrant Cloud'
-        type: boolean
-        default: false
-        required: false
-    secrets:
-      VAGRANT_CLOUD_TOKEN:
-        description: 'Token for Vagrant Cloud upload'
         required: false
 
 env:
@@ -31,17 +22,26 @@ env:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        build: ${{ fromJSON(inputs.builds) }}
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-packer@v2.0.1
       - run: sudo apt-get update
-      - run: sudo apt-get install -y qemu-system-x86
+      - run: sudo apt-get install -y qemu-system-x86 vagrant
+      - run: vagrant plugin install vagrant-libvirt
       - run: packer init .
+      - run: PACKER_LOG=1 packer build -only qemu.${{ matrix.build }} .
       - run: >-
-          PACKER_LOG=1 packer build
-          -parallel-builds=1
-          -var 'version=0.${{ github.run_number }}.${{ github.run_attempt }}'
-          -only '${{ inputs.builds }}'
-          ${{ !inputs.publish && '-except vagrant-cloud' || '' }}
-          .
+          vagrant cloud publish
+          --force
+          --no-private
+          mezinalexander/${{ matrix.build }}
+          0.${{ github.run_number }}.${{ github.run_attempt }}
+          libvirt
+          packer_${{ matrix.build }}_libvirt_amd64.box
+        if: inputs.publish
