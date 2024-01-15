@@ -10,7 +10,8 @@ on:
             "ubuntu2310",
             "fedora39",
             "silverblue39",
-            "opensusetumbleweed"
+            "opensusetumbleweed",
+            "alpine319"
           ]
       publish:
         description: 'Publish to Vagrant Cloud'
