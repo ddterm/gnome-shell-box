@@ -1,0 +1,120 @@
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <firewall>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <start_firewall config:type="boolean">false</start_firewall>
+  </firewall>
+  <general>
+    <ask-list config:type="list"/>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+      <second_stage config:type="boolean">false</second_stage>
+      <final_reboot config:type="boolean">true</final_reboot>
+    </mode>
+    <proposals config:type="list"/>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+  </general>
+  <networking>
+    <dns>
+      <hostname>${hostname}</hostname>
+    </dns>
+  </networking>
+  <report>
+    <errors>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </errors>
+    <messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+    </messages>
+    <warnings>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+    </warnings>
+    <yesno_messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+    </yesno_messages>
+  </report>
+  <scripts>
+    <chroot-scripts config:type="list">
+      <script>
+        <chrooted config:type="boolean">true</chrooted>
+        <source>
+echo 'vagrant ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/vagrant
+chmod 0440 /etc/sudoers.d/vagrant
+        </source>
+      </script>
+    </chroot-scripts>
+  </scripts>
+  <services-manager>
+    <default_target>graphical</default_target>
+    <services>
+      <enable config:type="list">
+        <service>sshd</service>
+      </enable>
+    </services>
+  </services-manager>
+  <software>
+    <products config:type="list">
+      <product>openSUSE</product>
+    </products>
+    <packages config:type="list">
+      <package>autoyast2-installation</package>
+      <package>gdm</package>
+      <package>sudo</package>
+      <package>openssh-server</package>
+      <package>spice-vdagent</package>
+      <package>qemu-guest-agent</package>
+      <package>spice-webdavd</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>apparmor</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>gnome</pattern>
+    </patterns>
+  </software>
+  <user_defaults>
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups config:type="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <encrypted config:type="boolean">false</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>vagrant</user_password>
+      <username>root</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">false</encrypted>
+      <fullname>Vagrant</fullname>
+      <user_password>vagrant</user_password>
+      <username>vagrant</username>
+      <authorized_keys config:type="list">
+        <listentry>${trimspace(file("${path.root}/keys/vagrant.pub"))}</listentry>
+      </authorized_keys>
+    </user>
+  </users>
+</profile>
