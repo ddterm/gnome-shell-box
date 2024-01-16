@@ -49,6 +49,7 @@ build {
   }
 
   provisioner "shell" {
+    start_retry_timeout = "10m"
     inline = [
       "setup-xorg-base",
       "setup-desktop gnome",
