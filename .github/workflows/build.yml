@@ -32,8 +32,6 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: chattr +C .
-        continue-on-error: true
       - uses: hashicorp/setup-packer@v2.0.1
       - run: sudo apt-get update
       - run: sudo apt-get install -y --no-install-recommends vagrant libvirt-dev debian-archive-keyring ca-certificates
