@@ -2,7 +2,6 @@ source "qemu" "fedora39" {
   iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-39-1.5.iso"
   iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/iso/Fedora-Everything-39-1.5-x86_64-CHECKSUM"
   vga = "virtio"
-  machine_type = "q35"
   cpus = 2
   memory = 2048
   headless = var.headless
