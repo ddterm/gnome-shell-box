@@ -28,5 +28,3 @@ autoinstall:
         sudo: ALL=(ALL) NOPASSWD:ALL
       - name: root
         plain_text_passwd: vagrant
-  late-commands:
-    - curtin in-target -- apt-get clean -y

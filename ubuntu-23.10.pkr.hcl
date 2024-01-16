@@ -22,17 +22,24 @@ source "qemu" "ubuntu2310" {
     "<tab><wait><tab><wait><tab><wait><tab><wait><tab><wait><tab><wait>",
     "c<wait10>",
     "set gfxpayload=keep<enter><wait>",
-    "linux /casper/vmlinuz autoinstall ",
+    "linux /casper/vmlinuz autoinstall console=ttyS0 ",
     "cloud-config-url=\"http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu-autoinstall.yml\" --- <enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
+  qemuargs = [["-serial", "stdio"]]
 }
 
 build {
   sources = [
     "source.qemu.ubuntu2310"
   ]
+
+  provisioner "shell" {
+    inline = [
+      "sudo apt-get clean -y",
+    ]
+  }
 
   post-processors {
     post-processor "vagrant" {
