@@ -5,7 +5,7 @@ source "qemu" "fedora39" {
   machine_type = "q35"
   cpus = 2
   memory = 2048
-  headless = true
+  headless = var.headless
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true
   disk_discard = "unmap"

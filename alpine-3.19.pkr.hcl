@@ -5,7 +5,7 @@ source "qemu" "alpine319" {
   machine_type = "q35"
   cpus = 2
   memory = 2048
-  headless = true
+  headless = var.headless
   shutdown_command = "/sbin/poweroff"
   qmp_enable = true
   disk_discard = "unmap"

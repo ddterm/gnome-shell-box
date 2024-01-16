@@ -10,3 +10,9 @@ packer {
     }
   }
 }
+
+variable "headless" {
+  type = bool
+  default = true
+  description = "Build in headless mode"
+}
