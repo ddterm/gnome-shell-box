@@ -1,6 +1,5 @@
 Vagrant.configure(2) do |config|
   config.vm.provider 'libvirt' do |libvirt, override|
-    libvirt.cpus = 4
     libvirt.memory = 2048
 
     if File.exist?('/dev/kvm')
@@ -13,8 +12,6 @@ Vagrant.configure(2) do |config|
       libvirt.channel :type => 'unix', :target_name => 'org.qemu.guest_agent.0', :target_type => 'virtio'
       libvirt.qemu_use_agent = true
     end
-
-    libvirt.qemu_use_session = true
 
     libvirt.graphics_type = 'spice'
     libvirt.channel :type => 'spicevmc', :target_name => 'com.redhat.spice.0', :target_type => 'virtio'
@@ -32,8 +29,6 @@ Vagrant.configure(2) do |config|
         libvirt.graphics_port = 0
       end
     end
-
-    libvirt.disk_bus = 'virtio'
   end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
