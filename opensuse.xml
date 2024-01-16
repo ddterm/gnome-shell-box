@@ -54,6 +54,8 @@
         <source>
 echo 'vagrant ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/vagrant
 chmod 0440 /etc/sudoers.d/vagrant
+
+zypper clean --all
         </source>
       </script>
     </chroot-scripts>

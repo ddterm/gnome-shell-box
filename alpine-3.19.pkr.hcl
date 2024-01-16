@@ -59,6 +59,7 @@ build {
       "usermod -p '${bcrypt("vagrant")}' vagrant",
       "usermod -p '${bcrypt("vagrant")}' root",
       "echo 'permit nopass :vagrant' >/etc/doas.d/vagrant.conf",
+      "rm -rf /var/cache/apk/*",
     ]
   }
 
