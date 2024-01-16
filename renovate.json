@@ -68,18 +68,6 @@
         "\\.pkr\\.hcl$"
       ],
       "matchStrings": [
-        "\\b(?<registryUrl>https://\\S+/)openSUSE-Tumbleweed-NET-x86_64-Snapshot(?<currentValue>\\d+)-Media\\.iso\\b"
-      ],
-      "datasourceTemplate": "custom.html",
-      "depNameTemplate": "openSUSE-Tumbleweed-NET-x86_64",
-      "extractVersionTemplate": "(^|/)openSUSE-Tumbleweed-NET-x86_64-Snapshot(?<version>\\d+)-Media\\.iso$"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "\\.pkr\\.hcl$"
-      ],
-      "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
       ],
       "datasourceTemplate": "custom.html",
@@ -106,13 +94,6 @@
       "major": {
         "enabled": false
       }
-    },
-    {
-      "matchDepNames": ["openSUSE-Tumbleweed-NET-x86_64"],
-      "major": {
-        "enabled": true
-      },
-      "branchTopic": "{{{depNameSanitized}}}"
     }
   ]
 }
