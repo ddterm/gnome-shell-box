@@ -8,7 +8,6 @@ source "qemu" "ubuntu2310" {
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true
   disk_discard = "unmap"
-  disk_detect_zeroes = "on"
   http_content = {
     "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = "ubuntu2310" })
   }

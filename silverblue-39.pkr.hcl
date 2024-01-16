@@ -8,7 +8,6 @@ source "qemu" "silverblue39" {
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true
   disk_discard = "unmap"
-  disk_detect_zeroes = "on"
   http_content = {
     "/silverblue.ks" = templatefile("${path.root}/silverblue.ks", { path = path, hostname = "silverblue39", version = "39" })
   }

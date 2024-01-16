@@ -8,7 +8,6 @@ source "qemu" "opensusetumbleweed" {
   shutdown_command = "sudo /sbin/halt -h -p"
   qmp_enable = true
   disk_discard = "unmap"
-  disk_detect_zeroes = "on"
   http_content = {
     "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed" })
   }

@@ -8,7 +8,6 @@ source "qemu" "fedora39" {
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true
   disk_discard = "unmap"
-  disk_detect_zeroes = "on"
   http_content = {
     "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = "fedora39" })
   }

@@ -8,7 +8,6 @@ source "qemu" "alpine319" {
   shutdown_command = "/sbin/poweroff"
   qmp_enable = true
   disk_discard = "unmap"
-  disk_detect_zeroes = "on"
   http_content = {
     "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = "alpine319" })
     "/vagrant.pub" = file("${path.root}/keys/vagrant.pub")
