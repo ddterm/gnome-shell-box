@@ -34,7 +34,6 @@ Vagrant.configure(2) do |config|
     end
 
     libvirt.disk_bus = 'virtio'
-    libvirt.video_vram = 256
   end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
