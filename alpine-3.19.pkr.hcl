@@ -22,7 +22,7 @@ source "qemu" "alpine319" {
   boot_command = [
     "<enter><wait10>",
     "root<enter><wait10>",
-    "setup-interfaces -a -r<enter><wait10>",
+    "setup-interfaces -a -r && ",
     "setup-sshd -k 'http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub' openssh<enter>",
   ]
 }
