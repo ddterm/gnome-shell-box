@@ -2,6 +2,7 @@ source "qemu" "opensusetumbleweed" {
   iso_url = "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240112-Media.iso"
   iso_checksum = "file:https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240112-Media.iso.sha256"
   vga = "virtio"
+  machine_type = "q35"
   cpus = 2
   memory = 2048
   headless = true

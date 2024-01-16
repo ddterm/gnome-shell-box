@@ -2,6 +2,7 @@ source "qemu" "ubuntu2310" {
   iso_url = "https://releases.ubuntu.com/23.10.1/ubuntu-23.10.1-desktop-amd64.iso"
   iso_checksum = "file:https://releases.ubuntu.com/23.10.1/SHA256SUMS"
   vga = "virtio"
+  machine_type = "q35"
   cpus = 2
   memory = 2048
   headless = true

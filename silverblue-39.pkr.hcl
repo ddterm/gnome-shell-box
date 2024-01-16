@@ -2,6 +2,7 @@ source "qemu" "silverblue39" {
   iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-39-1.5.iso"
   iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/39/Silverblue/x86_64/iso/Fedora-Silverblue-39-1.5-x86_64-CHECKSUM"
   vga = "virtio"
+  machine_type = "q35"
   cpus = 2
   memory = 2048
   headless = true

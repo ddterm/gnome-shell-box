@@ -8,6 +8,8 @@ Vagrant.configure(2) do |config|
       libvirt.driver = 'qemu'
     end
 
+    libvirt.machine_type = 'q35'
+
     libvirt.disk_driver :cache => 'writeback', :discard => 'unmap'
 
     if Vagrant.has_plugin?('vagrant-libvirt', '> 0.5.3')
