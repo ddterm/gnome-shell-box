@@ -29,13 +29,21 @@ jobs:
       matrix:
         build: ${{ fromJSON(inputs.builds) }}
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - run: chattr +C .
+        continue-on-error: true
       - uses: hashicorp/setup-packer@v2.0.1
       - run: sudo apt-get update
-      - run: sudo apt-get install -y qemu-system-x86 vagrant
+      - run: sudo apt-get install -y vagrant debian-archive-keyring ca-certificates
       - run: vagrant plugin install vagrant-libvirt
+      - run: >-
+          echo
+          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] https://ftp.debian.org/debian/ trixie main"
+          | sudo tee /etc/apt/sources.list.d/trixie.list
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y --no-install-recommends -t trixie qemu-system-x86 qemu-utils
       - run: packer init .
       - run: PACKER_LOG=1 packer build -only qemu.${{ matrix.build }} .
       - run: >-
