@@ -8,6 +8,8 @@ Vagrant.configure(2) do |config|
       libvirt.driver = 'qemu'
     end
 
+    libvirt.disk_driver :cache => 'writeback', :discard => 'unmap'
+
     if Vagrant.has_plugin?('vagrant-libvirt', '> 0.5.3')
       libvirt.channel :type => 'unix', :target_name => 'org.qemu.guest_agent.0', :target_type => 'virtio'
       libvirt.qemu_use_agent = true
