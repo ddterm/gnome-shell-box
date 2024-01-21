@@ -20,12 +20,12 @@ source "qemu" "opensusetumbleweed" {
   vga = "virtio"
   cpus = 2
   memory = 2048
-  headless = true
+  headless = var.headless
   shutdown_command = "sudo /sbin/halt -h -p"
   qmp_enable = true
   disk_discard = "unmap"
   http_content = {
-    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed" })
+    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed", product = "openSUSE" })
   }
   ssh_handshake_attempts = 1000
   ssh_timeout = "90m"

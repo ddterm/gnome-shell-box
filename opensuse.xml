@@ -70,7 +70,7 @@ zypper clean --all
   </services-manager>
   <software>
     <products config:type="list">
-      <product>openSUSE</product>
+      <product>${product}</product>
     </products>
     <packages config:type="list">
       <package>autoyast2-installation</package>

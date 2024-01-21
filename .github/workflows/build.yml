@@ -12,7 +12,8 @@ on:
             "silverblue39",
             "opensusetumbleweed",
             "alpine319",
-            "alpine318"
+            "alpine318",
+            "opensuseleap155"
           ]
       publish:
         description: 'Publish to Vagrant Cloud'
