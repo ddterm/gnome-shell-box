@@ -11,7 +11,8 @@ on:
             "fedora39",
             "silverblue39",
             "opensusetumbleweed",
-            "alpine319"
+            "alpine319",
+            "alpine318"
           ]
       publish:
         description: 'Publish to Vagrant Cloud'
