@@ -24,6 +24,7 @@
     <dns>
       <hostname>${hostname}</hostname>
     </dns>
+    <backend>network_manager</backend>
   </networking>
   <report>
     <errors>
