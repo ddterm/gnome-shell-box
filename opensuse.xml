@@ -88,17 +88,6 @@ zypper clean --all
       <pattern>gnome</pattern>
     </patterns>
   </software>
-  <user_defaults>
-    <expire/>
-    <group>100</group>
-    <groups/>
-    <home>/home</home>
-    <inactive>-1</inactive>
-    <no_groups config:type="boolean">true</no_groups>
-    <shell>/bin/bash</shell>
-    <skel>/etc/skel</skel>
-    <umask>022</umask>
-  </user_defaults>
   <users config:type="list">
     <user>
       <encrypted config:type="boolean">false</encrypted>
@@ -118,6 +107,15 @@ zypper clean --all
       <authorized_keys config:type="list">
         <listentry>${trimspace(file("${path.root}/keys/vagrant.pub"))}</listentry>
       </authorized_keys>
+      <uid>1000</uid>
+      <gid>1000</gid>
     </user>
   </users>
+  <groups config:type="list">
+    <group>
+      <gid>1000</gid>
+      <groupname>vagrant</groupname>
+      <userlist>vagrant</userlist>
+    </group>
+  </groups>
 </profile>
