@@ -13,7 +13,8 @@ on:
             "opensusetumbleweed",
             "alpine319",
             "alpine318",
-            "opensuseleap155"
+            "opensuseleap155",
+            "centos9s"
           ]
       publish:
         description: 'Publish to Vagrant Cloud'
