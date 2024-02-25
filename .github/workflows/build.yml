@@ -14,7 +14,8 @@ on:
             "alpine319",
             "alpine318",
             "opensuseleap155",
-            "centos9s"
+            "centos9s",
+            "debian12"
           ]
       publish:
         description: 'Publish to Vagrant Cloud'
