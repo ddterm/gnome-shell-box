@@ -53,9 +53,6 @@ jobs:
           --force
           --no-private
           --release
-          --architecture amd64
-          --checksum-type sha1
-          --checksum $(sha1sum packer_${{ matrix.build }}_libvirt_amd64.box | cut -d " " -f1)
           mezinalexander/${{ matrix.build }}
           0.${{ github.run_number }}.${{ github.run_attempt }}
           libvirt
