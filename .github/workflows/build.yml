@@ -52,6 +52,7 @@ jobs:
           vagrant cloud publish
           --force
           --no-private
+          --release
           mezinalexander/${{ matrix.build }}
           0.${{ github.run_number }}.${{ github.run_attempt }}
           libvirt
