@@ -56,6 +56,6 @@ jobs:
       - run: >-
           packer build
           -var version=0.${{ github.run_number }}.${{ github.run_attempt }}
-          ${{ inputs.publish && '' || '-except vagrant-cloud' }}
+          ${{ !inputs.publish && '-except vagrant-cloud' || '' }}
           -only qemu.${{ matrix.build }}
           .
