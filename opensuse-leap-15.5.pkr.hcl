@@ -54,7 +54,6 @@ build {
 
     post-processor "vagrant-cloud" {
       box_tag = "mezinalexander/opensuseleap155"
-      box_checksum = "sha1:{$checksum}"
       version = var.version
     }
   }

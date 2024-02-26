@@ -49,7 +49,6 @@ build {
 
     post-processor "vagrant-cloud" {
       box_tag = "mezinalexander/ubuntu2310"
-      box_checksum = "sha1:{$checksum}"
       version = var.version
     }
   }
