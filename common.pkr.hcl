@@ -16,3 +16,9 @@ variable "headless" {
   default = true
   description = "Build in headless mode"
 }
+
+variable "version" {
+  type = string
+  default = "0.0.0"
+  description = "Box version for Vagrant Cloud"
+}

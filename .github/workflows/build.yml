@@ -25,6 +25,7 @@ on:
 
 env:
   VAGRANT_CLOUD_TOKEN: ${{ secrets.VAGRANT_CLOUD_TOKEN }}
+  PACKER_LOG: 1
 
 jobs:
   build:
@@ -52,14 +53,9 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install -y --no-install-recommends -t trixie qemu-system-x86 qemu-utils
       - run: packer init .
-      - run: PACKER_LOG=1 packer build -only qemu.${{ matrix.build }} .
       - run: >-
-          vagrant cloud publish
-          --force
-          --no-private
-          --release
-          mezinalexander/${{ matrix.build }}
-          0.${{ github.run_number }}.${{ github.run_attempt }}
-          libvirt
-          packer_${{ matrix.build }}_libvirt_amd64.box
-        if: inputs.publish
+          packer build
+          -var version=0.${{ github.run_number }}.${{ github.run_attempt }}
+          ${{ inputs.publish && '' || '-except vagrant-cloud' }}
+          -only qemu.${{ matrix.build }}
+          .

@@ -51,5 +51,11 @@ build {
       keep_input_artifact = true
       vagrantfile_template = "Vagrantfile"
     }
+
+    post-processor "vagrant-cloud" {
+      box_tag = "mezinalexander/opensusetumbleweed"
+      box_checksum = "sha1:{$checksum}"
+      version = var.version
+    }
   }
 }
