@@ -12,7 +12,7 @@ source "qemu" "ubuntu2310" {
     "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = "ubuntu2310" })
   }
   ssh_handshake_attempts = 1000
-  ssh_timeout = "90m"
+  ssh_timeout = "2h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
   boot_wait = "10s"
