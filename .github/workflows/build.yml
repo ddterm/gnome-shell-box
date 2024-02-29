@@ -52,6 +52,8 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install -y --no-install-recommends -t trixie qemu-system-x86 qemu-utils
       - run: sudo apt-get clean -y
+      - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      - run: sudo docker image prune --all --force
       - run: packer init .
       - run: >-
           packer build
