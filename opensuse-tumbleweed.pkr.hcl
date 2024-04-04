@@ -1,22 +1,6 @@
-data "http" "opensusetumbleweed_iso_checksum" {
-  url = "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Current.iso.sha256"
-}
-
-local "opensusetumbleweed_iso_checksum_split" {
-  expression = compact(split(" ", data.http.opensusetumbleweed_iso_checksum.body))
-}
-
-local "opensusetumbleweed_iso_checksum" {
-  expression = trimspace(local.opensusetumbleweed_iso_checksum_split[0])
-}
-
-local "opensusetumbleweed_iso_name" {
-  expression = trimspace(local.opensusetumbleweed_iso_checksum_split[1])
-}
-
 source "qemu" "opensusetumbleweed" {
-  iso_url = "https://download.opensuse.org/tumbleweed/iso/${local.opensusetumbleweed_iso_name}"
-  iso_checksum = "sha256:${local.opensusetumbleweed_iso_checksum}"
+  iso_url = "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240403-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240403-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 2048

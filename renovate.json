@@ -1,0 +1,116 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "separateMinorPatch": false,
+  "customDatasources": {
+    "html": {
+      "format": "html"
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)alpine-virt-(?<currentValue>\\d+\\.\\d+\\.\\d+)-x86_64\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "alpine-virt",
+      "extractVersionTemplate": "(^|/)alpine-virt-(?<version>\\d+\\.\\d+\\.\\d+)-x86_64\\.iso$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)CentOS-Stream-(?<currentValue>\\d+-\\d+\\.\\d+)-x86_64-boot\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "CentOS-Stream",
+      "extractVersionTemplate": "(^|/)CentOS-Stream-(?<version>\\d+-\\d+\\.\\d+)-x86_64-boot\\.iso$",
+      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)Fedora-Everything-netinst-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
+        "\\b(?<registryUrl>https://\\S+/)Fedora-Everything-(?<currentValue>\\d+-\\d+\\.\\d+)-x86_64-CHECKSUM\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "Fedora-Everything",
+      "extractVersionTemplate": "(^|/)Fedora-Everything-netinst-x86_64-(?<version>\\d+-\\d+\\.\\d+)\\.iso$",
+      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)Fedora-Silverblue-ostree-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
+        "\\b(?<registryUrl>https://\\S+/)Fedora-Silverblue-(?<currentValue>\\d+-\\d+\\.\\d+)-x86_64-CHECKSUM\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "Fedora-Silverblue",
+      "extractVersionTemplate": "(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>\\d+-\\d+\\.\\d+)\\.iso$",
+      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)openSUSE-Leap-(?<currentValue>\\d+\\.\\d+-NET-x86_64-Build\\d+\\.\\d+)-Media\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "openSUSE-Leap",
+      "extractVersionTemplate": "(^|/)openSUSE-Leap-(?<version>\\d+\\.\\d+-NET-x86_64-Build\\d+\\.\\d+)-Media\\.iso$",
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)-NET-x86_64-Build(?<patch>\\d+)\\.(?<revision>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)openSUSE-Tumbleweed-NET-x86_64-Snapshot(?<currentValue>\\d+)-Media\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "openSUSE-Tumbleweed",
+      "extractVersionTemplate": "(^|/)openSUSE-Tumbleweed-NET-x86_64-Snapshot(?<version>\\d+)-Media\\.iso$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+\\.\\d+)-desktop-amd64\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "ubuntu",
+      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+\\.\\d+)-desktop-amd64\\.iso$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "\\b(?<registryUrl>https://\\S+/)debian-(?<currentValue>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso\\b"
+      ],
+      "datasourceTemplate": "custom.html",
+      "depNameTemplate": "debian",
+      "extractVersionTemplate": "(^|/)debian-(?<version>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso$"
+    }
+  ]
+}

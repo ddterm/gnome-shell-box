@@ -1,22 +1,6 @@
-data "http" "opensuseleap155_iso_checksum" {
-  url = "https://download.opensuse.org/distribution/leap/15.5/iso/openSUSE-Leap-15.5-NET-x86_64-Current.iso.sha256"
-}
-
-local "opensuseleap155_iso_checksum_split" {
-  expression = compact(split(" ", data.http.opensuseleap155_iso_checksum.body))
-}
-
-local "opensuseleap155_iso_checksum" {
-  expression = trimspace(local.opensuseleap155_iso_checksum_split[0])
-}
-
-local "opensuseleap155_iso_name" {
-  expression = trimspace(local.opensuseleap155_iso_checksum_split[1])
-}
-
 source "qemu" "opensuseleap155" {
-  iso_url = "https://download.opensuse.org/distribution/leap/15.5/iso/${local.opensuseleap155_iso_name}"
-  iso_checksum = "sha256:${local.opensuseleap155_iso_checksum}"
+  iso_url = "https://download.opensuse.org/distribution/leap/15.5/iso/openSUSE-Leap-15.5-NET-x86_64-Build491.1-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.5/iso/openSUSE-Leap-15.5-NET-x86_64-Build491.1-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 2048
