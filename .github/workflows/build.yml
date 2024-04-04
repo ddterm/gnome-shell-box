@@ -44,13 +44,7 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           | sudo tee /etc/apt/sources.list.d/hashicorp.list
       - run: sudo apt-get update
-      - run: sudo apt-get install -y --no-install-recommends packer debian-archive-keyring ca-certificates
-      - run: >-
-          echo
-          "deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] https://ftp.debian.org/debian/ trixie main"
-          | sudo tee /etc/apt/sources.list.d/trixie.list
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y --no-install-recommends -t trixie qemu-system-x86 qemu-utils
+      - run: sudo apt-get install -y --no-install-recommends packer qemu-system-x86 qemu-utils
       - run: sudo apt-get clean -y
       - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
       - run: sudo docker image prune --all --force
