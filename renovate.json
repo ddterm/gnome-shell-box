@@ -3,7 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "separateMinorPatch": false,
   "customDatasources": {
     "html": {
       "format": "html"
