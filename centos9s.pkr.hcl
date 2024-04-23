@@ -1,6 +1,6 @@
 source "qemu" "centos9s" {
-  iso_url = "https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-20240401.0-x86_64-boot.iso"
-  iso_checksum = "file:https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-20240401.0-x86_64-boot.iso.SHA1SUM"
+  iso_url = "https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-20240422.0-x86_64-boot.iso"
+  iso_checksum = "file:https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-20240422.0-x86_64-boot.iso.SHA1SUM"
   vga = "virtio"
   cpus = 2
   memory = 2048
