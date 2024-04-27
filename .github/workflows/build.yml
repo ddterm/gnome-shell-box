@@ -13,7 +13,7 @@ on:
             "opensusetumbleweed",
             "alpine319",
             "alpine318",
-            "opensuseleap155",
+            "opensuseleap156",
             "debian12"
           ]
       publish:

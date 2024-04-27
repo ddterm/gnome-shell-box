@@ -1,6 +1,6 @@
-source "qemu" "opensuseleap155" {
-  iso_url = "https://download.opensuse.org/distribution/leap/15.5/iso/openSUSE-Leap-15.5-NET-x86_64-Build491.1-Media.iso"
-  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.5/iso/openSUSE-Leap-15.5-NET-x86_64-Build491.1-Media.iso.sha256"
+source "qemu" "opensuseleap156" {
+  iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build669.1-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build669.1-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 2048
@@ -9,7 +9,7 @@ source "qemu" "opensuseleap155" {
   qmp_enable = true
   disk_discard = "unmap"
   http_content = {
-    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensuseleap155", product = "Leap" })
+    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensuseleap156", product = "Leap" })
   }
   ssh_handshake_attempts = 1000
   ssh_timeout = "2h"
@@ -27,7 +27,7 @@ source "qemu" "opensuseleap155" {
 
 build {
   sources = [
-    "source.qemu.opensuseleap155"
+    "source.qemu.opensuseleap156"
   ]
 
   post-processors {
@@ -37,7 +37,7 @@ build {
     }
 
     post-processor "vagrant-cloud" {
-      box_tag = "mezinalexander/opensuseleap155"
+      box_tag = "mezinalexander/opensuseleap156"
       version = var.version
     }
   }
