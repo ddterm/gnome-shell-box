@@ -12,6 +12,7 @@ on:
             "fedora39",
             "fedora40",
             "silverblue39",
+            "silverblue40",
             "opensusetumbleweed",
             "alpine319",
             "alpine318",
