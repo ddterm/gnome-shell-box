@@ -33,7 +33,7 @@ source "qemu" "fedora39" {
         "insmod chain<enter><wait>",
         "search --no-floppy --set=root -l 'Fedora-E-dvd-x86_64-39'<enter><wait>",
         "linux /images/pxeboot/vmlinuz console=ttyS0 inst.notmux inst.cmdline ",
-        "inst.stage2=hd:LABEL=Fedora-E-dvd-x86_64-39 rd.live.check ",
+        "inst.stage2=hd:LABEL=Fedora-E-dvd-x86_64-39 ",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/fedora.ks<enter><wait>",
         "initrd /images/pxeboot/initrd.img<enter><wait10>",
         "boot<enter><wait>"
