@@ -14,7 +14,6 @@ on:
             "alpine319",
             "alpine318",
             "opensuseleap155",
-            "centos9s",
             "debian12"
           ]
       publish:
