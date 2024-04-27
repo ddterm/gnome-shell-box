@@ -20,10 +20,14 @@ source "qemu" "debian12" {
   boot_command = [
     "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",
     "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",
-    "/install.amd/vmlinuz auto=true keyboard-configuration/xkb-keymap=en debconf/priority=critical initrd=/install.amd/initrd.gz --- ",
+    "/install.amd/vmlinuz console=ttyS0 ",
+    "auto=true DEBIAN_FRONTEND=text TERM=dumb debconf/priority=critical ",
+    "keyboard-configuration/xkb-keymap=en ",
+    "initrd=/install.amd/initrd.gz --- ",
     "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/debian-preseed.cfg ",
     "<enter>"
   ]
+  qemuargs = [["-serial", "stdio"]]
 }
 
 build {
