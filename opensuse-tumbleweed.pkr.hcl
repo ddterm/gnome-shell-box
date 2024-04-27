@@ -19,10 +19,11 @@ source "qemu" "opensusetumbleweed" {
   boot_keygroup_interval = "1s"
   boot_command = [
     "<esc><enter><wait>",
-    "linux netsetup=dhcp lang=en_US textmode=1 ssh=0 sshd=0 <wait>",
+    "linux netsetup=dhcp lang=en_US textmode=1 ssh=0 sshd=0 linuxrc.log=/dev/ttyS0 <wait>",
     "autoyast=http://{{ .HTTPIP }}:{{ .HTTPPort }}/opensuse.xml<wait>",
     "<enter><wait>"
   ]
+  qemuargs = [["-serial", "stdio"]]
 }
 
 build {
