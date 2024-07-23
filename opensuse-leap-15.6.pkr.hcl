@@ -1,6 +1,6 @@
 source "qemu" "opensuseleap156" {
-  iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build669.1-Media.iso"
-  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build669.1-Media.iso.sha256"
+  iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build710.3-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build710.3-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 2048
