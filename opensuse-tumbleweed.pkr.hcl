@@ -1,6 +1,6 @@
 source "qemu" "opensusetumbleweed" {
-  iso_url = "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240425-Media.iso"
-  iso_checksum = "file:https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240425-Media.iso.sha256"
+  iso_url = "https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240807-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240807-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 2048
