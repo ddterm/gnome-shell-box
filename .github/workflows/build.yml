@@ -7,7 +7,6 @@ on:
         required: false
         default: >-
           [
-            "ubuntu2310",
             "ubuntu2404",
             "fedora39",
             "fedora40",
