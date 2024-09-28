@@ -1,27 +1,33 @@
 on:
   workflow_dispatch:
     inputs:
-      builds:
-        description: 'Builds to build'
+      version:
+        description: 'Box version'
         type: string
         required: false
-        default: >-
-          [
-            "ubuntu2404",
-            "fedora39",
-            "fedora40",
-            "silverblue39",
-            "silverblue40",
-            "opensusetumbleweed",
-            "alpine319",
-            "alpine318",
-            "opensuseleap156",
-            "debian12"
-          ]
+        default: '0.0.0'
       publish:
         description: 'Publish to Vagrant Cloud'
         type: boolean
         default: false
+        required: false
+
+  workflow_call:
+    inputs:
+      version:
+        description: 'Box version'
+        type: string
+        required: false
+        default: '0.0.0'
+      publish:
+        description: 'Publish to Vagrant Cloud'
+        type: boolean
+        default: false
+        required: false
+
+    secrets:
+      VAGRANT_CLOUD_TOKEN:
+        description: 'Vagrant Cloud token for publishing'
         required: false
 
 env:
@@ -33,7 +39,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build: ${{ fromJSON(inputs.builds) }}
+        build:
+          - alpine318
+          - alpine319
+          - debian12
+          - fedora39
+          - fedora40
+          - opensuseleap156
+          - opensusetumbleweed
+          - silverblue39
+          - silverblue40
+          - ubuntu2404
 
     runs-on: ubuntu-22.04
     steps:
@@ -56,7 +72,7 @@ jobs:
       - run: packer init .
       - run: >-
           packer build
-          -var version=0.${{ github.run_number }}.${{ github.run_attempt }}
+          -var version=${{ inputs.version }}
           ${{ !inputs.publish && '-except vagrant-cloud' || '' }}
           -only qemu.${{ matrix.build }}
           .
