@@ -69,8 +69,8 @@ build {
       vagrantfile_template = "Vagrantfile"
     }
 
-    post-processor "vagrant-cloud" {
-      box_tag = "mezinalexander/alpine318"
+    post-processor "vagrant-registry" {
+      box_tag = "gnome-shell-box/alpine318"
       version = var.version
     }
   }

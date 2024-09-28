@@ -52,8 +52,8 @@ build {
       vagrantfile_template = "Vagrantfile"
     }
 
-    post-processor "vagrant-cloud" {
-      box_tag = "mezinalexander/silverblue39"
+    post-processor "vagrant-registry" {
+      box_tag = "gnome-shell-box/silverblue39"
       version = var.version
     }
   }

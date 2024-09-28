@@ -47,8 +47,8 @@ build {
       vagrantfile_template = "Vagrantfile"
     }
 
-    post-processor "vagrant-cloud" {
-      box_tag = "mezinalexander/ubuntu2404"
+    post-processor "vagrant-registry" {
+      box_tag = "gnome-shell-box/ubuntu2404"
       version = var.version
     }
   }

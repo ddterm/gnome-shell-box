@@ -52,8 +52,8 @@ build {
       vagrantfile_template = "Vagrantfile"
     }
 
-    post-processor "vagrant-cloud" {
-      box_tag = "mezinalexander/fedora39"
+    post-processor "vagrant-registry" {
+      box_tag = "gnome-shell-box/fedora39"
       version = var.version
     }
   }

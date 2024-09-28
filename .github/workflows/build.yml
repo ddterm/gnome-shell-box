@@ -7,7 +7,7 @@ on:
         required: false
         default: '0.0.0'
       publish:
-        description: 'Publish to Vagrant Cloud'
+        description: 'Publish to Vagrant Registry'
         type: boolean
         default: false
         required: false
@@ -20,18 +20,23 @@ on:
         required: false
         default: '0.0.0'
       publish:
-        description: 'Publish to Vagrant Cloud'
+        description: 'Publish to Vagrant Registry'
         type: boolean
         default: false
         required: false
 
     secrets:
-      VAGRANT_CLOUD_TOKEN:
-        description: 'Vagrant Cloud token for publishing'
+      HCP_CLIENT_ID:
+        description: 'HCP service principal client ID for publishing'
+        required: false
+
+      HCP_CLIENT_SECRET:
+        description: 'HCP service principal client secret for publishing'
         required: false
 
 env:
-  VAGRANT_CLOUD_TOKEN: ${{ secrets.VAGRANT_CLOUD_TOKEN }}
+  HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+  HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
   PACKER_LOG: 1
 
 jobs:
@@ -76,6 +81,6 @@ jobs:
       - run: >-
           packer build
           -var version=${{ inputs.version }}
-          ${{ !inputs.publish && '-except vagrant-cloud' || '' }}
+          ${{ !inputs.publish && '-except vagrant-registry' || '' }}
           -only qemu.${{ matrix.build }}
           .
