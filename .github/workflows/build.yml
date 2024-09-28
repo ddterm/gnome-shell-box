@@ -42,6 +42,7 @@ jobs:
         build:
           - alpine318
           - alpine319
+          - alpine320
           - debian12
           - fedora39
           - fedora40
