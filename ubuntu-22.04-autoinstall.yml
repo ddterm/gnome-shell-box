@@ -1,0 +1,64 @@
+#cloud-config
+autoinstall:
+  version: 1
+  apt:
+    geoip: false
+    primary:
+      - arches: [default]
+        uri: https://mirrors.edge.kernel.org/ubuntu/
+    security:
+      - arches: [default]
+        uri: https://mirrors.edge.kernel.org/ubuntu/
+  identity:
+    username: vagrant
+    password: ${bcrypt("vagrant")}
+    hostname: ${hostname}
+  ssh:
+    install-server: yes
+    authorized-keys:
+      - ${trimspace(file("${path.root}/keys/vagrant.pub"))}
+    allow-pw: yes
+  packages:
+    - ubuntu-desktop
+    - qemu-guest-agent
+    - spice-vdagent
+    - spice-webdavd
+    - cloud-init
+  snaps:
+    - name: firefox
+    - name: gnome-3-38-2004
+    - name: gtk-common-themes
+    - name: snap-store
+    - name: snapd-desktop-integration
+  user-data:
+    users:
+      - name: vagrant
+        sudo: ALL=(ALL) NOPASSWD:ALL
+      - name: root
+        plain_text_passwd: vagrant
+  storage:
+    layout:
+      name: direct
+  early-commands:
+    - echo 'linux-generic-hwe-22.04' > /run/kernel-meta-package
+  late-commands:
+    # Enable the boot splash
+    - >-
+      sed -i /target/etc/default/grub -e
+      's/GRUB_CMDLINE_LINUX_DEFAULT=".*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/'
+    - curtin in-target -- update-grub
+
+    # Let NetworkManager handle network
+    - rm -f /target/etc/netplan/*
+    - >-
+      printf "network:\n  version: 2\n  renderer: NetworkManager"
+      > /target/etc/netplan/01-network-manager-all.yaml
+
+    - curtin in-target -- apt-get remove -y ubuntu-server ubuntu-server-minimal
+
+    # Keep cloud-init, as it performs some of the installation on first boot.
+    - curtin in-target -- apt-get install -y cloud-init
+
+    # Finally, remove things only installed as dependencies of other things
+    # we have already removed.
+    - curtin in-target -- apt-get autoremove -y

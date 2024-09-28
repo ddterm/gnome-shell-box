@@ -80,11 +80,11 @@
         "\\.pkr\\.hcl$"
       ],
       "matchStrings": [
-        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)-desktop-amd64\\.iso\\b"
+        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
       ],
       "datasourceTemplate": "custom.html",
-      "depNameTemplate": "ubuntu-desktop-amd64",
-      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+(?:\\.\\d+)?)-desktop-amd64\\.iso$",
+      "depNameTemplate": "ubuntu-{{{ ubuntuType }}}-amd64",
+      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+(\\.\\d+)?)-(desktop|live-server)-amd64\\.iso$",
       "versioningTemplate": "ubuntu"
     },
     {
