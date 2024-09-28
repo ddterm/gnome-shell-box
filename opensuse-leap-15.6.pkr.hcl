@@ -3,7 +3,7 @@ source "qemu" "opensuseleap156" {
   iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build710.3-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "sudo /sbin/halt -h -p"
   qmp_enable = true

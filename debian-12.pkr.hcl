@@ -3,7 +3,7 @@ source "qemu" "debian12" {
   iso_checksum = "file:https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA256SUMS"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "shutdown -P now"
   qmp_enable = true

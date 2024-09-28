@@ -3,7 +3,7 @@ source "qemu" "ubuntu2404" {
   iso_checksum = "file:https://releases.ubuntu.com/noble/SHA256SUMS"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true

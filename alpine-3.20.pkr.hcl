@@ -3,7 +3,7 @@ source "qemu" "alpine320" {
   iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/alpine-virt-3.20.3-x86_64.iso.sha256"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "/sbin/poweroff"
   qmp_enable = true

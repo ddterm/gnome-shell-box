@@ -3,7 +3,7 @@ source "qemu" "silverblue39" {
   iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/39/Silverblue/x86_64/iso/Fedora-Silverblue-39-1.5-x86_64-CHECKSUM"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = true

@@ -3,7 +3,7 @@ source "qemu" "opensusetumbleweed" {
   iso_checksum = "file:https://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-NET-x86_64-Snapshot20240927-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
-  memory = 2048
+  memory = 4096
   headless = var.headless
   shutdown_command = "sudo /sbin/halt -h -p"
   qmp_enable = true
