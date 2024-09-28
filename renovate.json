@@ -80,11 +80,12 @@
         "\\.pkr\\.hcl$"
       ],
       "matchStrings": [
-        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+\\.\\d+)-desktop-amd64\\.iso\\b"
+        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)-desktop-amd64\\.iso\\b"
       ],
       "datasourceTemplate": "custom.html",
       "depNameTemplate": "ubuntu",
-      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+\\.\\d+)-desktop-amd64\\.iso$"
+      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+(?:\\.\\d+)?)-desktop-amd64\\.iso$",
+      "versioningTemplate": "ubuntu"
     },
     {
       "customType": "regex",
@@ -97,6 +98,21 @@
       "datasourceTemplate": "custom.html",
       "depNameTemplate": "debian",
       "extractVersionTemplate": "(^|/)debian-(?<version>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso$"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": ["*.pkr.hcl"],
+      "major": {
+        "enabled": false
+      }
+    },
+    {
+      "matchDepNames": ["openSUSE-Tumbleweed"],
+      "major": {
+        "enabled": true
+      },
+      "branchTopic": "{{{depNameSanitized}}}"
     }
   ]
 }
