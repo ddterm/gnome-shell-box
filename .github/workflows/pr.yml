@@ -1,6 +1,10 @@
 on:
   workflow_dispatch:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      # Not: - reopened
 
 concurrency: ${{ github.workflow }}/${{ github.ref }}
 
