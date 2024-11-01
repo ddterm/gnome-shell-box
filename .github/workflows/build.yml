@@ -49,11 +49,11 @@ jobs:
           - alpine319
           - alpine320
           - debian12
-          - fedora39
+          - fedora41
           - fedora40
           - opensuseleap156
           - opensusetumbleweed
-          - silverblue39
+          - silverblue41
           - silverblue40
           - ubuntu2204
           - ubuntu2404

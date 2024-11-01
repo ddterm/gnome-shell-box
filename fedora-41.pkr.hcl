@@ -1,6 +1,6 @@
-source "qemu" "silverblue39" {
-  iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-39-1.5.iso"
-  iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/39/Silverblue/x86_64/iso/Fedora-Silverblue-39-1.5-x86_64-CHECKSUM"
+source "qemu" "fedora41" {
+  iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-41-1.4.iso"
+  iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/iso/Fedora-Everything-41-1.4-x86_64-CHECKSUM"
   vga = "virtio"
   cpus = 2
   memory = 4096
@@ -9,7 +9,7 @@ source "qemu" "silverblue39" {
   qmp_enable = true
   disk_discard = "unmap"
   http_content = {
-    "/silverblue.ks" = templatefile("${path.root}/silverblue.ks", { path = path, hostname = "silverblue39", version = "39" })
+    "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = "fedora41" })
   }
   ssh_handshake_attempts = 1000
   ssh_timeout = "2h"
@@ -31,10 +31,10 @@ source "qemu" "silverblue39" {
         "insmod part_gpt<enter><wait>",
         "insmod ext2<enter><wait>",
         "insmod chain<enter><wait>",
-        "search --no-floppy --set=root -l 'Fedora-SB-ostree-x86_64-39'<enter><wait>",
+        "search --no-floppy --set=root -l 'Fedora-E-dvd-x86_64-41'<enter><wait>",
         "linux /images/pxeboot/vmlinuz console=ttyS0 inst.notmux inst.cmdline ",
-        "inst.stage2=hd:LABEL=Fedora-SB-ostree-x86_64-39 ",
-        "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/silverblue.ks<enter><wait>",
+        "inst.stage2=hd:LABEL=Fedora-E-dvd-x86_64-41 ",
+        "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/fedora.ks<enter><wait>",
         "initrd /images/pxeboot/initrd.img<enter><wait10>",
         "boot<enter><wait>"
   ]
@@ -43,7 +43,7 @@ source "qemu" "silverblue39" {
 
 build {
   sources = [
-    "source.qemu.silverblue39"
+    "source.qemu.fedora41"
   ]
 
   post-processors {
@@ -53,7 +53,7 @@ build {
     }
 
     post-processor "vagrant-registry" {
-      box_tag = "gnome-shell-box/silverblue39"
+      box_tag = "gnome-shell-box/fedora41"
       version = var.version
     }
   }
