@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  config.vm.provider 'libvirt' do |libvirt, override|
+  config.vm.provider :libvirt do |libvirt|
     libvirt.memory = 4096
 
     if File.exist?('/dev/kvm')
@@ -34,4 +34,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
+
+  if /^alpine\d+$/ =~ '{{build_name}}'
+    config.ssh.sudo_command = 'doas -n -u root %c'
+  end
 end

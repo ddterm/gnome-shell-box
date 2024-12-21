@@ -25,9 +25,9 @@ on:
         required: false
 
 env:
-  HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
-  HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
-  PACKER_LOG: 1
+  VAGRANT_BOX_UPDATE_CHECK_DISABLE: 1
+  VAGRANT_CHECKPOINT_DISABLE: 1
+  VAGRANT_FORCE_COLOR: 1
 
 jobs:
   build:
@@ -55,6 +55,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          path: src
       - run: >-
           wget -O- https://apt.releases.hashicorp.com/gpg
           | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -62,7 +63,7 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           | sudo tee /etc/apt/sources.list.d/hashicorp.list
       - run: sudo apt-get update
-      - run: sudo apt-get install -y --no-install-recommends packer qemu-system-x86 qemu-utils
+      - run: sudo apt-get install -y --no-install-recommends packer qemu-system-x86 qemu-system-modules-spice qemu-utils vagrant libvirt-daemon-system libvirt-dev dnsmasq
       - run: sudo apt-get clean -y
       - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
       - run: sudo docker image prune --all --force
@@ -71,8 +72,30 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - run: packer init .
+        working-directory: src
       - run: >-
           packer build
           ${{ !inputs.publish && '-except vagrant-registry' || '' }}
           -only qemu.${{ matrix.build }}
           .
+        working-directory: src
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+          PACKER_LOG: 1
+      - run: mkdir test
+      - run: vagrant plugin install --verbose vagrant-libvirt
+        working-directory: test
+      - run: vagrant box add --clean --force --no-tty --name ${{ matrix.build }} ../src/*.box
+        working-directory: test
+      - run: rm src/*.box
+      - run: vagrant init --template ../src/test/Vagrantfile.erb ${{ matrix.build }}
+        working-directory: test
+      - run: |
+          sudo mkdir -p /etc/qemu
+          echo "allow virbr0" | sudo tee /etc/qemu/bridge.conf
+          sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
+      - run: vagrant up --no-tty
+        working-directory: test
+      - run: vagrant destroy --force --graceful
+        working-directory: test
