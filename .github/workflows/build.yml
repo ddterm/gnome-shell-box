@@ -1,11 +1,6 @@
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Box version'
-        type: string
-        required: false
-        default: '0.0.0'
       publish:
         description: 'Publish to Vagrant Registry'
         type: boolean
@@ -14,11 +9,6 @@ on:
 
   workflow_call:
     inputs:
-      version:
-        description: 'Box version'
-        type: string
-        required: false
-        default: '0.0.0'
       publish:
         description: 'Publish to Vagrant Registry'
         type: boolean
@@ -63,6 +53,8 @@ jobs:
     steps:
       - run: nproc
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - run: >-
           wget -O- https://apt.releases.hashicorp.com/gpg
           | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -81,7 +73,6 @@ jobs:
       - run: packer init .
       - run: >-
           packer build
-          -var version=${{ inputs.version }}
           ${{ !inputs.publish && '-except vagrant-registry' || '' }}
           -only qemu.${{ matrix.build }}
           .

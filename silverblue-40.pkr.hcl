@@ -53,7 +53,7 @@ build {
 
     post-processor "vagrant-registry" {
       box_tag = "gnome-shell-box/silverblue40"
-      version = var.version
+      version = local.version
     }
   }
 }

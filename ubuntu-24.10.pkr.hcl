@@ -48,7 +48,7 @@ build {
 
     post-processor "vagrant-registry" {
       box_tag = "gnome-shell-box/ubuntu2410"
-      version = var.version
+      version = local.version
     }
   }
 }
