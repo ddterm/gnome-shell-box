@@ -43,7 +43,6 @@ build {
 
   post-processors {
     post-processor "vagrant" {
-      keep_input_artifact = true
       vagrantfile_template = "Vagrantfile"
     }
 
