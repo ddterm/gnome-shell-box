@@ -24,6 +24,7 @@ source "qemu" "alpine320" {
     "setup-interfaces -a -r && ",
     "setup-sshd -k 'http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub' openssh<enter>",
   ]
+  qemuargs = [["-serial", "stdio"]]
 }
 
 build {
