@@ -15,16 +15,18 @@ source "qemu" "debian12" {
   ssh_username = "root"
   ssh_password = "vagrant"
   boot_command = [
-    "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",
-    "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",
-    "/install.amd/vmlinuz console=ttyS0 ",
-    "auto=true DEBIAN_FRONTEND=text TERM=dumb debconf/priority=critical ",
-    "keyboard-configuration/xkb-keymap=en ",
-    "initrd=/install.amd/initrd.gz --- ",
-    "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/debian-preseed.cfg ",
-    "<enter>"
+    "c<wait10>",
+    "set gfxpayload=keep<enter><wait>",
+    "linux /install.amd/vmlinuz console=ttyS0 ",
+    "auto=true DEBIAN_FRONTEND=text TERM=dumb priority=critical keymap=en ",
+    "url=http://{{.HTTPIP}}:{{.HTTPPort}}/debian-preseed.cfg --- <enter><wait>",
+    "initrd /install.amd/initrd.gz<enter><wait>",
+    "boot<enter>",
   ]
+  efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
+  efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
   qemuargs = [["-serial", "stdio"]]
+  machine_type = var.machine_type
 }
 
 build {
@@ -80,6 +82,12 @@ build {
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
+      include = [
+        "${path.root}/ovmf/OVMF_CODE.4m.fd",
+        "${path.root}/output-${source.name}/efivars.fd",
+        "${path.root}/ovmf/edk2.License.txt",
+        "${path.root}/ovmf/OvmfPkg.License.txt",
+      ]
     }
 
     post-processor "vagrant-registry" {
