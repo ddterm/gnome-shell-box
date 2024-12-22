@@ -38,6 +38,7 @@ jobs:
           - alpine318
           - alpine319
           - alpine320
+          - alpine321
           - debian12
           - fedora41
           - fedora40
