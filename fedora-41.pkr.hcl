@@ -14,7 +14,6 @@ source "qemu" "fedora41" {
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
-  boot_keygroup_interval = "1s"
   boot_command = [
         "c<wait10>",
         "set gfxpayload=keep<enter><wait>",

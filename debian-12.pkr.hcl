@@ -14,7 +14,6 @@ source "qemu" "debian12" {
   ssh_timeout = "1h"
   ssh_username = "root"
   ssh_password = "vagrant"
-  boot_keygroup_interval = "1s"
   boot_command = [
     "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",
     "<esc><wait><esc><wait><esc><wait><esc><wait><esc><wait><esc><wait>",

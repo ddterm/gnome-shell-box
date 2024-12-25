@@ -15,7 +15,6 @@ source "qemu" "alpine320" {
   ssh_username = "root"
   ssh_private_key_file = "${path.root}/keys/vagrant"
   boot_wait = "1m"
-  boot_keygroup_interval = "1s"
   boot_command = [
     "<enter><wait10>",
     "root<enter><wait10>",

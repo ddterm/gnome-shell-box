@@ -14,7 +14,6 @@ source "qemu" "opensuseleap156" {
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
-  boot_keygroup_interval = "1s"
   boot_command = [
     "<esc><enter><wait>",
     "linux netsetup=dhcp lang=en_US textmode=1 ssh=0 sshd=0 linuxrc.log=/dev/ttyS0 <wait>",
