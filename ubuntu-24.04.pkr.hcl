@@ -18,8 +18,6 @@ source "qemu" "ubuntu2404" {
   boot_wait = "10s"
   boot_keygroup_interval = "1s"
   boot_command = [
-    "<tab><wait><tab><wait><tab><wait><tab><wait><tab><wait><tab><wait>",
-    "<tab><wait><tab><wait><tab><wait><tab><wait><tab><wait><tab><wait>",
     "c<wait10>",
     "set gfxpayload=keep<enter><wait>",
     "linux /casper/vmlinuz autoinstall console=ttyS0 ",
