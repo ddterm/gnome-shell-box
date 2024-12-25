@@ -18,25 +18,13 @@ source "qemu" "silverblue41" {
   boot_wait = "10s"
   boot_keygroup_interval = "1s"
   boot_command = [
-        "c<wait>",
-        "insmod all_video<enter><wait>",
+        "c<wait10>",
         "set gfxpayload=keep<enter><wait>",
-        "insmod increment<enter><wait>",
-        "insmod xfs<enter><wait>",
-        "insmod diskfilter<enter><wait>",
-        "insmod mdraid1x<enter><wait>",
-        "insmod fat<enter><wait>",
-        "insmod blscfg<enter><wait>",
-        "insmod gzio<enter><wait>",
-        "insmod part_gpt<enter><wait>",
-        "insmod ext2<enter><wait>",
-        "insmod chain<enter><wait>",
-        "search --no-floppy --set=root -l 'Fedora-SB-ostree-x86_64-41'<enter><wait>",
         "linux /images/pxeboot/vmlinuz console=ttyS0 inst.notmux inst.cmdline ",
         "inst.stage2=hd:LABEL=Fedora-SB-ostree-x86_64-41 ",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/silverblue.ks<enter><wait>",
         "initrd /images/pxeboot/initrd.img<enter><wait10>",
-        "boot<enter><wait>"
+        "boot<enter>"
   ]
   qemuargs = [["-serial", "stdio"]]
 }
