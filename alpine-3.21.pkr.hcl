@@ -12,8 +12,6 @@ source "qemu" "alpine321" {
     "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = "alpine321" })
     "/vagrant.pub" = file("${path.root}/keys/vagrant.pub")
   }
-  ssh_handshake_attempts = 1000
-  ssh_timeout = "10m"
   ssh_username = "root"
   ssh_private_key_file = "${path.root}/keys/vagrant"
   boot_wait = "1m"
