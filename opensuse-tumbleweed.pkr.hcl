@@ -28,7 +28,7 @@ source "qemu" "opensusetumbleweed" {
     "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed", product = "openSUSE" })
   }
   ssh_handshake_attempts = 1000
-  ssh_timeout = "2h"
+  ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
   boot_wait = "10s"

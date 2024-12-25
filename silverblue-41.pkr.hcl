@@ -12,7 +12,7 @@ source "qemu" "silverblue41" {
     "/silverblue.ks" = templatefile("${path.root}/silverblue.ks", { path = path, hostname = "silverblue41", version = "41" })
   }
   ssh_handshake_attempts = 1000
-  ssh_timeout = "2h"
+  ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
   boot_wait = "10s"
