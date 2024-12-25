@@ -11,7 +11,6 @@ source "qemu" "opensuseleap156" {
   http_content = {
     "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensuseleap156", product = "Leap" })
   }
-  ssh_handshake_attempts = 1000
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"

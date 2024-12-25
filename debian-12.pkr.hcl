@@ -11,7 +11,6 @@ source "qemu" "debian12" {
   http_content = {
     "/debian-preseed.cfg" = templatefile("${path.root}/debian-preseed.cfg", { path = path, hostname = "debian12" })
   }
-  ssh_handshake_attempts = 1000
   ssh_timeout = "1h"
   ssh_username = "root"
   ssh_password = "vagrant"

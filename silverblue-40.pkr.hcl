@@ -11,7 +11,6 @@ source "qemu" "silverblue40" {
   http_content = {
     "/silverblue.ks" = templatefile("${path.root}/silverblue.ks", { path = path, hostname = "silverblue40", version = "40" })
   }
-  ssh_handshake_attempts = 1000
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"

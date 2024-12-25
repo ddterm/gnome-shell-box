@@ -11,7 +11,6 @@ source "qemu" "ubuntu2204" {
   http_content = {
     "/ubuntu-22.04-autoinstall.yml" = templatefile("${path.root}/ubuntu-22.04-autoinstall.yml", { path = path, hostname = "ubuntu2204" })
   }
-  ssh_handshake_attempts = 1000
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"

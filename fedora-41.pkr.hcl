@@ -11,7 +11,6 @@ source "qemu" "fedora41" {
   http_content = {
     "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = "fedora41" })
   }
-  ssh_handshake_attempts = 1000
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
