@@ -15,8 +15,7 @@ autoinstall:
     hostname: ${hostname}
   ssh:
     install-server: yes
-    authorized-keys:
-      - ${trimspace(file("${path.root}/keys/vagrant.pub"))}
+    authorized-keys: ${format("%#v", compact(split("\n", file("${path.root}/keys/vagrant.pub"))))}
     allow-pw: yes
   packages:
     - ubuntu-desktop
