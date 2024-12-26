@@ -21,6 +21,12 @@ variable "headless" {
   description = "Build in headless mode"
 }
 
+variable "machine_type" {
+  type = string
+  default = "pc-q35-8.2"
+  description = "QEMU machine type"
+}
+
 data "external-raw" "git-describe" {
   program = ["git", "describe", "--tags"]
 }

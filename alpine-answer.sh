@@ -18,4 +18,4 @@ ROOTSSHKEY="${trimspace(file("${path.root}/keys/vagrant.pub"))}"
 
 NTPOPTS="openntpd"
 
-DISKOPTS="-k lts -m sys /dev/vda"
+DISKOPTS="-v -k lts -m sys /dev/vda"

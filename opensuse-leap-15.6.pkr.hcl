@@ -15,12 +15,17 @@ source "qemu" "opensuseleap156" {
   ssh_username = "vagrant"
   ssh_password = "vagrant"
   boot_command = [
-    "<esc><enter><wait>",
-    "linux netsetup=dhcp lang=en_US textmode=1 ssh=0 sshd=0 linuxrc.log=/dev/ttyS0 <wait>",
-    "autoyast=http://{{ .HTTPIP }}:{{ .HTTPPort }}/opensuse.xml<wait>",
-    "<enter><wait>"
+    "c<wait10>",
+    "set gfxpayload=keep<enter><wait>",
+    "linux /boot/x86_64/loader/linux netsetup=dhcp lang=en_US textmode=1 ssh=0 sshd=0 linuxrc.log=/dev/ttyS0 <wait>",
+    "autoyast=http://{{ .HTTPIP }}:{{ .HTTPPort }}/opensuse.xml<enter><wait>",
+    "initrd /boot/x86_64/loader/initrd<enter><wait>",
+    "boot<enter>"
   ]
+  efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
+  efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
   qemuargs = [["-serial", "stdio"]]
+  machine_type = var.machine_type
 }
 
 build {
@@ -31,6 +36,12 @@ build {
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
+      include = [
+        "${path.root}/ovmf/OVMF_CODE.4m.fd",
+        "${path.root}/output-${source.name}/efivars.fd",
+        "${path.root}/ovmf/edk2.License.txt",
+        "${path.root}/ovmf/OvmfPkg.License.txt",
+      ]
     }
 
     post-processor "vagrant-registry" {

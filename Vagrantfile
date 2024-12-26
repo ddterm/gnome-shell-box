@@ -1,3 +1,5 @@
+BOX_DIR = File.dirname(File.expand_path(__FILE__))
+
 Vagrant.configure(2) do |config|
   config.vm.provider :libvirt do |libvirt|
     libvirt.memory = 4096
@@ -31,6 +33,10 @@ Vagrant.configure(2) do |config|
         libvirt.graphics_port = 0
       end
     end
+
+    libvirt.nvram = File.join(BOX_DIR, 'efivars.fd')
+    libvirt.loader = File.join(BOX_DIR, Dir.glob('OVMF_CODE*', base: BOX_DIR).first)
+    libvirt.machine_type = 'pc-q35-8.2'
   end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true

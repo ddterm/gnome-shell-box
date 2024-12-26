@@ -21,7 +21,10 @@ source "qemu" "alpine318" {
     "setup-interfaces -a -r && ",
     "setup-sshd -k 'http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub' openssh<enter>",
   ]
+  efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
+  efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
   qemuargs = [["-serial", "stdio"]]
+  machine_type = var.machine_type
 }
 
 build {
@@ -37,6 +40,13 @@ build {
     env = {
       "ERASE_DISKS" = "/dev/vda"
     }
+  }
+
+  provisioner "shell" {
+    inline = [
+      "apk add efibootmgr",
+      "efibootmgr -c -d /dev/vda -p 1 -L alpine -l '\\EFI\\alpine\\grubx64.efi'",
+    ]
   }
 
   provisioner "shell" {
@@ -64,6 +74,12 @@ build {
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
+      include = [
+        "${path.root}/ovmf/OVMF_CODE.4m.fd",
+        "${path.root}/output-${source.name}/efivars.fd",
+        "${path.root}/ovmf/edk2.License.txt",
+        "${path.root}/ovmf/OvmfPkg.License.txt",
+      ]
     }
 
     post-processor "vagrant-registry" {
