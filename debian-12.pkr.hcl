@@ -76,6 +76,7 @@ build {
   provisioner "shell" {
     inline = [
       "apt-get clean -y",
+      "sudo fstrim -av --quiet-unsupported",
     ]
   }
 

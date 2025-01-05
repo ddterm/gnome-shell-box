@@ -33,6 +33,12 @@ build {
     "source.qemu.opensuseleap156"
   ]
 
+  provisioner "shell" {
+    inline = [
+      "sudo fstrim -av --quiet-unsupported",
+    ]
+  }
+
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"

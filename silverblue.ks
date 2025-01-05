@@ -21,4 +21,6 @@ chmod 0440 /etc/sudoers.d/vagrant
 
 sed -i -e "s/.*PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config
 sed -i -e "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+
+fstrim -av --quiet-unsupported
 %end

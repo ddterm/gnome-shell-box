@@ -49,6 +49,12 @@ build {
     "source.qemu.opensusetumbleweed"
   ]
 
+  provisioner "shell" {
+    inline = [
+      "sudo fstrim -av --quiet-unsupported",
+    ]
+  }
+
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
