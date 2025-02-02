@@ -1,0 +1,74 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos";
+
+  networking.networkmanager.enable = true;
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  services.printing.enable = true;
+
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  users.users.vagrant = {
+    initialPassword = "vagrant";
+    isNormalUser = true;
+    description = "Vagrant";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+    ];
+    openssh.authorizedKeys.keys = [
+      ${join("\n", formatlist("\"%s\"", compact(split("\n", file("${path.root}/keys/vagrant.pub")))))}
+    ];
+  };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "vagrant" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  environment.systemPackages = with pkgs; [
+  ];
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+    settings.KbdInteractiveAuthentication = true;
+    settings.PermitRootLogin = "yes";
+  };
+
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
+  services.spice-webdavd.enable = true;
+
+  system.stateVersion = "${state_version}";
+}
