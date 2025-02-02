@@ -86,6 +86,17 @@
       "datasourceTemplate": "custom.html",
       "depNameTemplate": "debian-amd64-netinst",
       "extractVersionTemplate": "(^|/)debian-(?<version>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso$"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "variable\\s+\"nixos_channel\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)"
+      ],
+      "datasourceTemplate": "endoflife-date",
+      "packageNameTemplate": "NixOS"
     }
   ],
   "packageRules": [
