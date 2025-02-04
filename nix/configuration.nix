@@ -1,15 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, modulesPath, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      "$${toString modulesPath}/profiles/qemu-guest.nix"
+      ./bootloader.nix
+      ./vagrant.nix
     ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "nixos";
 
   networking.networkmanager.enable = true;
 
@@ -32,11 +30,22 @@
     #media-session.enable = true;
   };
 
+  users.users.root = { password = "vagrant"; };
+
+  users.groups.vagrant = {
+    name = "vagrant";
+    members = [ "vagrant" ];
+  };
+
   users.users.vagrant = {
-    initialPassword = "vagrant";
+    description = "Vagrant User";
+    name = "vagrant";
+    group = "vagrant";
+    password = "vagrant";
+    extraGroups = [ "networkmanager" "users" "wheel" ];
     isNormalUser = true;
-    description = "Vagrant";
-    extraGroups = [ "networkmanager" "wheel" ];
+    createHome = true;
+    useDefaultShell = true;
     packages = with pkgs; [
     ];
     openssh.authorizedKeys.keys = [
@@ -57,6 +66,13 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    findutils
+    iputils
+    jq
+    nettools
+    netcat
+    nfs-utils
+    rsync
   ];
 
   services.openssh = {

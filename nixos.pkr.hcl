@@ -35,12 +35,12 @@ source "qemu" "nixos" {
   disk_discard = "unmap"
   ssh_timeout = "1h"
   ssh_username = "root"
-  ssh_password = "nixos"
+  ssh_password = "vagrant"
   boot_wait = "1m"
   boot_command = [
     "sudo passwd root<enter><wait>",
-    "nixos<enter><wait>",
-    "nixos<enter><wait>",
+    "vagrant<enter><wait>",
+    "vagrant<enter><wait>",
   ]
   efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
   efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
@@ -66,20 +66,31 @@ build {
       "swapon /dev/vda2",
       "mkfs.fat -F 32 -n boot /dev/vda3",
       "mount -o discard /dev/disk/by-label/nixos /mnt",
-      "mkdir -p /mnt/boot",
-      "mount /dev/disk/by-label/boot /mnt/boot",
+      "mkdir -p /mnt/boot/efi",
+      "mount /dev/disk/by-label/boot /mnt/boot/efi",
       "nixos-generate-config --root /mnt",
     ]
   }
 
   provisioner "file" {
-    content = templatefile("${path.root}/configuration.nix", { path = path, state_version = var.nixos_channel })
+    sources = [
+      "${path.root}/nix/bootloader.nix",
+      "${path.root}/nix/vagrant-hostname.nix",
+      "${path.root}/nix/vagrant-network.nix",
+      "${path.root}/nix/vagrant.nix",
+    ]
+    destination = "/mnt/etc/nixos/"
+  }
+
+  provisioner "file" {
+    content = templatefile("${path.root}/nix/configuration.nix", { path = path, state_version = var.nixos_channel })
     destination = "/mnt/etc/nixos/configuration.nix"
   }
 
   provisioner "shell" {
     inline = [
-      "nixos-install --no-root-password",
+      "nixos-install",
+      "echo 'nix-env --delete-generations old; nix-collect-garbage -d; fstrim -av --quiet-unsupported' | nixos-enter"
     ]
   }
 
