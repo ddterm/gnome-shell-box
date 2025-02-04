@@ -8,7 +8,9 @@ bootloader --location=mbr
 firstboot --disable
 autopart
 user --name=vagrant --groups=wheel --password=vagrant --plaintext
-${join("\n", formatlist("sshkey --username=vagrant \"%s\"", compact(split("\n", file("${path.root}/keys/vagrant.pub")))))}
+%{ for key in compact(split("\n", file("${path.root}/keys/vagrant.pub"))) ~}
+sshkey --username=vagrant ${jsonencode(key)}
+%{ endfor ~}
 reboot
 
 repo --name=fedora --mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch

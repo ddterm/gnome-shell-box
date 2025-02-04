@@ -49,7 +49,9 @@
     packages = with pkgs; [
     ];
     openssh.authorizedKeys.keys = [
-      ${join("\n", formatlist("\"%s\"", compact(split("\n", file("${path.root}/keys/vagrant.pub")))))}
+      %{ for key in compact(split("\n", file("${path.root}/keys/vagrant.pub"))) ~}
+      ${jsonencode(key)}
+      %{ endfor ~}
     ];
   };
 
