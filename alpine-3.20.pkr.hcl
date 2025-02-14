@@ -6,7 +6,7 @@ source "qemu" "alpine320" {
   memory = 4096
   headless = var.headless
   shutdown_command = "/sbin/poweroff"
-  qmp_enable = true
+  qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
     "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = "alpine320" })

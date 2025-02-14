@@ -6,7 +6,7 @@ source "qemu" "debian12" {
   memory = 4096
   headless = var.headless
   shutdown_command = "shutdown -P now"
-  qmp_enable = true
+  qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
     "/debian-preseed.cfg" = templatefile("${path.root}/debian-preseed.cfg", { path = path, hostname = "debian12" })

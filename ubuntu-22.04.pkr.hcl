@@ -6,7 +6,7 @@ source "qemu" "ubuntu2204" {
   memory = 4096
   headless = var.headless
   shutdown_command = "sudo shutdown -P now"
-  qmp_enable = true
+  qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
     "/ubuntu-22.04-autoinstall.yml" = templatefile("${path.root}/ubuntu-22.04-autoinstall.yml", { path = path, hostname = "ubuntu2204" })

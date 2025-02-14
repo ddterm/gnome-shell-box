@@ -22,7 +22,7 @@ source "qemu" "opensusetumbleweed" {
   memory = 4096
   headless = var.headless
   shutdown_command = "sudo /sbin/halt -h -p"
-  qmp_enable = true
+  qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
     "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed", product = "openSUSE" })

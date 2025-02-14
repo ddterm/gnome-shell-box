@@ -6,7 +6,7 @@ source "qemu" "silverblue41" {
   memory = 4096
   headless = var.headless
   shutdown_command = "sudo shutdown -P now"
-  qmp_enable = true
+  qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
     "/silverblue.ks" = templatefile("${path.root}/silverblue.ks", { path = path, hostname = "silverblue41", version = "41" })
