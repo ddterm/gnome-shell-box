@@ -105,7 +105,9 @@ zypper clean --all
       <user_password>vagrant</user_password>
       <username>vagrant</username>
       <authorized_keys config:type="list">
-        <listentry>${trimspace(file("${path.root}/keys/vagrant.pub"))}</listentry>
+        %{ for key in compact(split("\n", file("${path.root}/keys/vagrant.pub"))) ~}
+        <listentry>${key}</listentry>
+        %{ endfor ~}
       </authorized_keys>
       <uid>1000</uid>
       <gid>1000</gid>
