@@ -73,7 +73,6 @@ chmod 0440 /etc/sudoers.d/vagrant
     </products>
     <packages config:type="list">
       <package>autoyast2-installation</package>
-      <package>gdm</package>
       <package>sudo</package>
       <package>openssh-server</package>
       <package>spice-vdagent</package>
