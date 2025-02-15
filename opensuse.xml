@@ -84,6 +84,7 @@ chmod 0440 /etc/sudoers.d/vagrant
       <pattern>apparmor</pattern>
       <pattern>enhanced_base</pattern>
       <pattern>gnome</pattern>
+      <pattern>gnome_x11</pattern>
     </patterns>
   </software>
   <users config:type="list">
