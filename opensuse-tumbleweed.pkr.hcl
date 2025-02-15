@@ -51,6 +51,12 @@ build {
 
   provisioner "shell" {
     inline = [
+      "sudo zypper clean --all",
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
       "sudo fstrim -av --quiet-unsupported",
     ]
   }
