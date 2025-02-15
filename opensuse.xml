@@ -74,7 +74,6 @@ chmod 0440 /etc/sudoers.d/vagrant
     <packages config:type="list">
       <package>autoyast2-installation</package>
       <package>sudo</package>
-      <package>openssh-server</package>
       <package>spice-vdagent</package>
       <package>qemu-guest-agent</package>
       <package>spice-webdavd</package>
