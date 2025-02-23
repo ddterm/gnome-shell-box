@@ -78,12 +78,15 @@ chmod 0440 /etc/sudoers.d/vagrant
       <package>spice-webdavd</package>
     </packages>
     <patterns config:type="list">
-      <pattern>apparmor</pattern>
+      <pattern>${security}</pattern>
       <pattern>enhanced_base</pattern>
       <pattern>gnome</pattern>
       <pattern>gnome_x11</pattern>
     </patterns>
   </software>
+  <security>
+    <lsm_select>${security}</lsm_select>
+  </security>
   <users config:type="list">
     <user>
       <encrypted config:type="boolean">false</encrypted>

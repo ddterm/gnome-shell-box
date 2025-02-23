@@ -25,7 +25,7 @@ source "qemu" "opensusetumbleweed" {
   qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
-    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed", product = "openSUSE" })
+    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensusetumbleweed", product = "openSUSE", security = "selinux" })
   }
   ssh_timeout = "1h"
   ssh_username = "vagrant"

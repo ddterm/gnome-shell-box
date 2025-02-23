@@ -9,7 +9,7 @@ source "qemu" "opensuseleap156" {
   qmp_enable = var.headless
   disk_discard = "unmap"
   http_content = {
-    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensuseleap156", product = "Leap" })
+    "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = "opensuseleap156", product = "Leap", security = "apparmor" })
   }
   ssh_timeout = "1h"
   ssh_username = "vagrant"
