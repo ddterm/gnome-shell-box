@@ -1,6 +1,6 @@
 source "qemu" "alpine318" {
-  iso_url = "https://mirrors.edge.kernel.org/alpine/v3.18/releases/x86_64/alpine-virt-3.18.11-x86_64.iso"
-  iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.18/releases/x86_64/alpine-virt-3.18.11-x86_64.iso.sha256"
+  iso_url = "https://mirrors.edge.kernel.org/alpine/v3.18/releases/x86_64/alpine-virt-3.18.12-x86_64.iso"
+  iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.18/releases/x86_64/alpine-virt-3.18.12-x86_64.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 4096
