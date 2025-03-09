@@ -41,6 +41,7 @@ jobs:
           - alpine320
           - alpine321
           - debian12
+          - debiantesting
           - fedora41
           - fedora40
           - opensuseleap156
