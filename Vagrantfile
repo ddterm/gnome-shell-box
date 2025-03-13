@@ -22,13 +22,15 @@ Vagrant.configure(2) do |config|
     if Vagrant.has_plugin?('vagrant-libvirt', '>= 0.7.0')
       libvirt.video_accel3d = true
       libvirt.video_type = 'virtio'
-      libvirt.graphics_autoport = 'no'
-      if Vagrant.has_plugin?('vagrant-libvirt', '>= 0.8.0')
-        libvirt.graphics_port = nil
-        libvirt.graphics_ip = nil
-      else
-        libvirt.graphics_ip = 'none'
-        libvirt.graphics_port = 0
+      if not Vagrant.has_plugin?('vagrant-libvirt', '>= 0.11.0')
+        libvirt.graphics_autoport = 'no'
+        if Vagrant.has_plugin?('vagrant-libvirt', '>= 0.8.0')
+          libvirt.graphics_port = nil
+          libvirt.graphics_ip = nil
+        else
+          libvirt.graphics_ip = 'none'
+          libvirt.graphics_port = 0
+        end
       end
     end
 
