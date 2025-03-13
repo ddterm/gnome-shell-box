@@ -1,0 +1,37 @@
+{
+	"silent": true,
+	"kernels": ["linux-lts"],
+	"bootloader": "grub",
+	"hostname": "${hostname}",
+	"disk_config": {
+		"config_type": "pre_mounted_config",
+		"mountpoint": "/mnt/archinstall"
+	},
+	"audio_config": {
+		"audio": "pipewire"
+	},
+	"network_config": {
+		"type": "nm"
+	},
+	"profile_config": {
+		"gfx_driver": "VMware / VirtualBox (open-source)",
+		"greeter": "gdm",
+		"profile": {
+			"main": "Desktop",
+			"details": [
+				"GNOME",
+				"sshd"
+			]
+		}
+	},
+	"packages": [
+		"xf86-video-qxl",
+		"qemu-guest-agent",
+		"vulkan-virtio",
+		"spice-vdagent",
+		"rsync"
+	],
+	"custom_commands": [
+		"pacman -Scc --noconfirm"
+	]
+}

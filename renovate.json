@@ -97,6 +97,21 @@
       ],
       "datasourceTemplate": "endoflife-date",
       "packageNameTemplate": "NixOS"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^archlinux\\.pkr\\.hcl$"
+      ],
+      "matchStrings": [
+        "https://geo.mirror.pkgbuild.com/iso/(?<currentValue>\\d+\\.\\d+\\.\\d+)",
+        "/archlinux-(?<currentValue>\\d+\\.\\d+\\.\\d+)-x86_64\\.iso"
+      ],
+      "datasourceTemplate": "custom.html",
+      "registryUrlTemplate": "https://geo.mirror.pkgbuild.com/iso/",
+      "depNameTemplate": "archlinux-iso",
+      "extractVersionTemplate": "(^|/)(?<version>\\d+\\.\\d+\\.\\d+)/$",
+      "versioningTemplate": "loose"
     }
   ],
   "packageRules": [
