@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
     box_dir = File.dirname(File.expand_path(__FILE__))
 
     libvirt.nvram = File.join(box_dir, 'efivars.fd')
-    libvirt.loader = File.join(box_dir, Dir.glob('OVMF_CODE*', base: box_dir).first)
+    libvirt.loader = File.join(box_dir, 'OVMF_CODE.4m.fd')
     libvirt.machine_type = 'pc-q35-8.2'
   end
 
