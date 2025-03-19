@@ -1,0 +1,4 @@
+/.renovate/
+/.vagrant/
+/output-*/
+/*.box
