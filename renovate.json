@@ -121,5 +121,15 @@
         "enabled": false
       }
     }
+  ],
+  "logLevelRemap": [
+    {
+      "matchMessage": "No dependencies found in file for custom regex manager",
+      "newLogLevel": "warn"
+    },
+    {
+      "matchMessage": "Found no results from datasource that look like a version",
+      "newLogLevel": "warn"
+    }
   ]
 }
