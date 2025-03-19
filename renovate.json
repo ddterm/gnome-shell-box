@@ -12,7 +12,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^alpine-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)alpine-virt-(?<currentValue>\\d+\\.\\d+\\.\\d+)-x86_64\\.iso\\b"
@@ -24,7 +24,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^fedora-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)Fedora-Everything-netinst-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
@@ -38,7 +38,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^silverblue-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)Fedora-Silverblue-ostree-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
@@ -52,7 +52,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^opensuse-leap-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)openSUSE-Leap-(?<currentValue>\\d+\\.\\d+-NET-x86_64-Build\\d+\\.\\d+)-Media\\.iso\\b"
@@ -65,7 +65,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^ubuntu-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
@@ -78,7 +78,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^debian-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)debian-(?<currentValue>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso\\b"
@@ -90,7 +90,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "\\.pkr\\.hcl$"
+        "^nixos\\.pkr\\.hcl$"
       ],
       "matchStrings": [
         "variable\\s+\"nixos_channel\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)"
