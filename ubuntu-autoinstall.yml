@@ -30,3 +30,7 @@ autoinstall:
         sudo: ALL=(ALL) NOPASSWD:ALL
       - name: root
         plain_text_passwd: vagrant
+%{ if hostname == "ubuntu2504" }
+  late-commands:
+    - systemctl reboot -i
+%{ endif }
