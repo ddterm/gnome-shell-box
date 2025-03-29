@@ -68,12 +68,12 @@
         "^ubuntu-.*\\.pkr\\.hcl$"
       ],
       "matchStrings": [
-        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
+        "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>.*)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
       ],
       "datasourceTemplate": "custom.html",
       "depNameTemplate": "ubuntu-{{{ ubuntuType }}}-amd64",
-      "extractVersionTemplate": "(^|/)ubuntu-(?<version>\\d+\\.\\d+(\\.\\d+)?)-(desktop|live-server)-amd64\\.iso$",
-      "versioningTemplate": "ubuntu"
+      "extractVersionTemplate": "(^|/)ubuntu-(?<version>.*)-(desktop|live-server)-amd64\\.iso$",
+      "versioningTemplate": "deb"
     },
     {
       "customType": "regex",
