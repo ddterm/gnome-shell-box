@@ -1,6 +1,6 @@
 source "qemu" "fedora42" {
-  iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/test/42_Beta/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-42_Beta-1.4.iso"
-  iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/test/42_Beta/Everything/x86_64/iso/Fedora-Everything-iso-42_Beta-1.4-x86_64-CHECKSUM"
+  iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/42/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-42-1.1.iso"
+  iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/42/Everything/x86_64/iso/Fedora-Everything-42-1.1-x86_64-CHECKSUM"
   vga = "virtio"
   cpus = 2
   memory = 4096
