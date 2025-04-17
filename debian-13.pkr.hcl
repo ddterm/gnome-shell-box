@@ -92,7 +92,7 @@ build {
     }
 
     post-processor "vagrant-registry" {
-      box_tag = "gnome-shell-box/debian12"
+      box_tag = "gnome-shell-box/debian13"
       version = local.version
     }
   }
