@@ -73,7 +73,7 @@
       "datasourceTemplate": "custom.html",
       "depNameTemplate": "ubuntu-{{{ ubuntuType }}}-amd64",
       "extractVersionTemplate": "(^|/)ubuntu-(?<version>.*)-(desktop|live-server)-amd64\\.iso$",
-      "versioningTemplate": "deb"
+      "versioningTemplate": "ubuntu"
     },
     {
       "customType": "regex",

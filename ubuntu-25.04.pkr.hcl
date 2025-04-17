@@ -1,5 +1,5 @@
 source "qemu" "ubuntu2504" {
-  iso_url = "https://releases.ubuntu.com/25.04/ubuntu-25.04-beta-desktop-amd64.iso"
+  iso_url = "https://releases.ubuntu.com/25.04/ubuntu-25.04-desktop-amd64.iso"
   iso_checksum = "file:https://releases.ubuntu.com/25.04/SHA256SUMS"
   vga = "virtio"
   cpus = 2
