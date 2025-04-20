@@ -40,7 +40,6 @@ jobs:
           - alpine320
           - alpine321
           - archlinux
-          - debian12
           - debian13
           - fedora40
           - fedora41
