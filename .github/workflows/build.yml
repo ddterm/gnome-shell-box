@@ -36,7 +36,6 @@ jobs:
       fail-fast: false
       matrix:
         build:
-          - alpine318
           - alpine319
           - alpine320
           - alpine321
