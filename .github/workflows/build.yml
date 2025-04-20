@@ -51,7 +51,6 @@ jobs:
           - silverblue40
           - silverblue41
           - silverblue42
-          - ubuntu2204
           - ubuntu2404
           - ubuntu2410
           - ubuntu2504
