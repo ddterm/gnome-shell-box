@@ -5,7 +5,7 @@
 	"hostname": "${hostname}",
 	"disk_config": {
 		"config_type": "pre_mounted_config",
-		"mountpoint": "/mnt/archinstall"
+		"mountpoint": "/mnt"
 	},
 	"audio_config": {
 		"audio": "pipewire"

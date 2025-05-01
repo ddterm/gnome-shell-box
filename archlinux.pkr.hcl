@@ -1,6 +1,6 @@
 source "qemu" "archlinux" {
-  iso_url = "https://geo.mirror.pkgbuild.com/iso/2025.03.01/archlinux-2025.03.01-x86_64.iso"
-  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/2025.03.01/sha256sums.txt"
+  iso_url = "https://geo.mirror.pkgbuild.com/iso/2025.05.01/archlinux-2025.05.01-x86_64.iso"
+  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/2025.05.01/sha256sums.txt"
   vga = "virtio"
   cpus = 2
   memory = 4096
@@ -37,15 +37,15 @@ build {
       "partprobe /dev/vda",
       "udevadm settle",
       "mkfs.btrfs /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root')",
-      "mount --mkdir -o discard,compress-force=zstd /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root') /mnt/archinstall",
+      "mount --mkdir -o discard,compress-force=zstd /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root') /mnt",
       "mkfs.fat -F 32 -S 4096 /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition')",
-      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/archinstall/boot/efi",
+      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/boot/efi",
     ]
   }
 
   provisioner "shell" {
     inline = [
-      "archinstall --config 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent"
+      "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug"
     ]
   }
 
