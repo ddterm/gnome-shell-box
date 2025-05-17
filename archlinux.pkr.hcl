@@ -45,6 +45,12 @@ build {
 
   provisioner "shell" {
     inline = [
+      "pacman -Sy --noconfirm archinstall"
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
       "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug"
     ]
   }
