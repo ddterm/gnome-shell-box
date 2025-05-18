@@ -27,6 +27,12 @@ variable "machine_type" {
   description = "QEMU machine type"
 }
 
+variable "log_dir" {
+  type = string
+  default = "logs"
+  description = "Log download directory (on the host)"
+}
+
 data "external-raw" "git-describe" {
   program = ["git", "describe", "--tags"]
 }

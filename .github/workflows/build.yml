@@ -88,6 +88,7 @@ jobs:
           packer build
           ${{ !inputs.publish && '-except vagrant-registry' || '' }}
           -only qemu.${{ matrix.build }}
+          -var "log_dir=$GITHUB_WORKSPACE/logs"
           .
           2>&1
           | tee "$GITHUB_WORKSPACE/logs/packer.txt"
