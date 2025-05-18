@@ -43,40 +43,40 @@ build {
       "partprobe /dev/vda",
       "udevadm settle",
       "mkfs.btrfs /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root')",
-      "mount --mkdir -o discard,compress-force=zstd /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root') /mnt/archinstall",
+      "mount --mkdir -o discard,compress-force=zstd /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root') /mnt",
       "mkfs.fat -F 32 -S 4096 /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition')",
-      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/archinstall/boot/efi",
+      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/boot/efi",
     ]
   }
 
   provisioner "shell" {
     inline = [
-      "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug --mount-point /mnt/archinstall"
+      "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug"
     ]
   }
 
   provisioner "shell" {
     inline = [
-      "echo 'vagrant ALL=(ALL:ALL) NOPASSWD: ALL' > /mnt/archinstall/etc/sudoers.d/vagrant",
-      "mkdir -p /mnt/archinstall/root/.ssh",
-      "mkdir -p /mnt/archinstall/home/vagrant/.ssh",
+      "echo 'vagrant ALL=(ALL:ALL) NOPASSWD: ALL' > /mnt/etc/sudoers.d/vagrant",
+      "mkdir -p /mnt/root/.ssh",
+      "mkdir -p /mnt/home/vagrant/.ssh",
     ]
   }
 
   provisioner "file" {
     source = "${path.root}/keys/vagrant.pub"
-    destination = "/mnt/archinstall/root/.ssh/authorized_keys"
+    destination = "/mnt/root/.ssh/authorized_keys"
   }
 
   provisioner "file" {
     source = "${path.root}/keys/vagrant.pub"
-    destination = "/mnt/archinstall/home/vagrant/.ssh/authorized_keys"
+    destination = "/mnt/home/vagrant/.ssh/authorized_keys"
   }
 
   provisioner "shell" {
     inline = [
-      "chmod 0644 /mnt/archinstall/home/vagrant/.ssh/authorized_keys",
-      "arch-chroot /mnt/archinstall chown vagrant /home/vagrant/.ssh /home/vagrant/.ssh/authorized_keys"
+      "chmod 0644 /mnt/home/vagrant/.ssh/authorized_keys",
+      "arch-chroot /mnt chown vagrant /home/vagrant/.ssh /home/vagrant/.ssh/authorized_keys"
     ]
   }
 
