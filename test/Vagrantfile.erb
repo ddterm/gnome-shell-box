@@ -10,4 +10,25 @@ Vagrant.configure("2") do |config|
     libvirt.qemu_use_session = true
     libvirt.video_accel3d = false
   end
+
+  config.vm.provision 'wait-gdm', type: 'shell', inline: <<-SCRIPT
+    GDM_PID=
+
+    while [ -z "$GDM_PID" ]
+    do
+      if [ -e /run/gdm/gdm.pid ]
+      then
+        GDM_PID="$(cat /run/gdm/gdm.pid)"
+      elif [ -e /run/gdm3.pid ]
+      then
+        GDM_PID="$(cat /run/gdm3.pid)"
+      else
+        echo Waiting for gdm to start
+        sleep 1
+      fi
+    done
+
+    sleep 5
+    test -d "/proc/$GDM_PID/" && echo gdm is running: "$GDM_PID"
+  SCRIPT
 end
