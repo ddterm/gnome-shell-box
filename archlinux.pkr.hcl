@@ -51,7 +51,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug"
+      "archinstall --config-url 'http://${build.PackerHTTPAddr}/archinstall-config.json' --creds-url 'http://${build.PackerHTTPAddr}/archinstall-creds.json' --silent --debug --mount-point /mnt/archinstall"
     ]
   }
 
