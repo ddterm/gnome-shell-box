@@ -45,7 +45,7 @@ build {
       "mkfs.btrfs /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root')",
       "mount --mkdir -o discard,compress-force=zstd /dev/disk/by-partlabel/$(systemd-escape 'Arch Linux root') /mnt",
       "mkfs.fat -F 32 -S 4096 /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition')",
-      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/boot/efi",
+      "mount --mkdir /dev/disk/by-partlabel/$(systemd-escape 'EFI system partition') /mnt/boot",
     ]
   }
 
