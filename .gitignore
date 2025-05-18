@@ -1,4 +1,5 @@
 /.renovate/
 /.vagrant/
 /output-*/
+/logs/
 /*.box
