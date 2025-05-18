@@ -80,6 +80,18 @@ build {
     ]
   }
 
+  provisioner "file" {
+    direction = "download"
+    destination = "${var.log_dir}/${build.PackerRunUUID}/"
+    source = "/var/log/archinstall/"
+  }
+
+  error-cleanup-provisioner "file" {
+    direction = "download"
+    destination = "${var.log_dir}/${build.PackerRunUUID}/"
+    source = "/var/log/archinstall/"
+  }
+
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
