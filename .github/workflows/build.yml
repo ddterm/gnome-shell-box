@@ -97,11 +97,6 @@ jobs:
           HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
           HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
           PACKER_LOG: 1
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.build }}-logs
-          path: logs
-        if: always()
       - run: du -h *.box
         working-directory: src
       - run: mkdir test
@@ -118,5 +113,15 @@ jobs:
           sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
       - run: vagrant up --no-tty
         working-directory: test
+      - id: virt_domain_name
+        run: echo "virt_domain_name=$(virsh --connect=qemu:///session --quiet list --name)" >>"$GITHUB_OUTPUT"
+      - run: virsh --connect=qemu:///session screenshot "$VIRT_DOMAIN_NAME" --file logs/screenshot.png
+        env:
+          VIRT_DOMAIN_NAME: ${{ steps.virt_domain_name.outputs.virt_domain_name }}
       - run: vagrant destroy --force --graceful
         working-directory: test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.build }}-logs
+          path: logs
+        if: always()
