@@ -32,6 +32,12 @@ build {
 
   provisioner "shell" {
     inline = [
+      "pacman -Sy --noconfirm archinstall"
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
       "sgdisk --align-end --clear --new 0:0:+1M --typecode=0:ef02 --change-name=0:'BIOS boot partition' --new 0:0:+300M --typecode=0:ef00 --change-name=0:'EFI system partition' --new 0:0:0 --typecode=0:8304 --change-name=0:'Arch Linux root' /dev/vda",
       "udevadm settle",
       "partprobe /dev/vda",
