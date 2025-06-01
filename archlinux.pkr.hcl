@@ -1,6 +1,6 @@
 source "qemu" "archlinux" {
-  iso_url = "https://geo.mirror.pkgbuild.com/iso/2025.05.01/archlinux-2025.05.01-x86_64.iso"
-  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/2025.05.01/sha256sums.txt"
+  iso_url = "https://geo.mirror.pkgbuild.com/iso/2025.06.01/archlinux-2025.06.01-x86_64.iso"
+  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/2025.06.01/sha256sums.txt"
   vga = "virtio"
   cpus = 2
   memory = 4096
