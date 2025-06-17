@@ -11,8 +11,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^alpine-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "alpine-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)alpine-virt-(?<currentValue>\\d+\\.\\d+\\.\\d+)-x86_64\\.iso\\b"
@@ -23,8 +23,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^fedora-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "fedora-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)Fedora-Everything-netinst-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
@@ -37,8 +37,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^silverblue-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "silverblue-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)Fedora-Silverblue-ostree-x86_64-(?<currentValue>\\d+-\\d+\\.\\d+)\\.iso\\b",
@@ -51,8 +51,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^opensuse-leap-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "opensuse-leap-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)openSUSE-Leap-(?<currentValue>\\d+\\.\\d+-NET-x86_64-Build\\d+\\.\\d+)-Media\\.iso\\b"
@@ -64,8 +64,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^ubuntu-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "ubuntu-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)ubuntu-(?<currentValue>.*)-(?<ubuntuType>desktop|live-server)-amd64\\.iso\\b"
@@ -77,8 +77,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^debian-.*\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "debian-*.pkr.hcl"
       ],
       "matchStrings": [
         "\\b(?<registryUrl>https://\\S+/)debian-(?<currentValue>\\d+\\.\\d+\\.\\d+)-amd64-netinst\\.iso\\b"
@@ -89,8 +89,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^nixos\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "nixos.pkr.hcl"
       ],
       "matchStrings": [
         "variable\\s+\"nixos_channel\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)"
@@ -100,8 +100,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^archlinux\\.pkr\\.hcl$"
+      "managerFilePatterns": [
+        "archlinux.pkr.hcl"
       ],
       "matchStrings": [
         "https://geo.mirror.pkgbuild.com/iso/(?<currentValue>\\d+\\.\\d+\\.\\d+)",
