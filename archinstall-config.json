@@ -14,7 +14,7 @@
 		"type": "nm"
 	},
 	"profile_config": {
-		"gfx_driver": "VMware / VirtualBox (open-source)",
+		"gfx_driver": "VirtualBox (open-source)",
 		"greeter": "gdm",
 		"profile": {
 			"main": "Desktop",
