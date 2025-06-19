@@ -1,6 +1,6 @@
 variable "nixos_channel" {
   type = string
-  default = "24.11"
+  default = "25.05"
 }
 
 data "http" "nixos_iso_checksum" {
