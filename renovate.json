@@ -12,6 +12,18 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "common.pkr.hcl"
+      ],
+      "matchStrings": [
+        "{(\\s*(version\\s*=\\s*\"(?<currentValue>[^\"]+)\"|source\\s*=\\s*\"(?<packageName>[^\"]+)\")\\s*)+}"
+      ],
+      "packageNameTemplate": "{{{replace 'github.com/([^/]+)/(.+)' '$1/packer-plugin-$2' packageName}}}",
+      "datasourceTemplate": "github-tags",
+      "versioningTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "alpine-*.pkr.hcl"
       ],
       "matchStrings": [
