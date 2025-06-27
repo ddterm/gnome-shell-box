@@ -88,5 +88,9 @@
   services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;
 
+  # The default value prints "\e]0;\a".
+  # It gets appended to the program output and thus breaks Vagrant.
+  programs.bash.logout = "";
+
   system.stateVersion = "${state_version}";
 }

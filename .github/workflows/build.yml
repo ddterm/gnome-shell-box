@@ -112,6 +112,11 @@ jobs:
           PACKER_LOG: 1
       - run: du -h *.box
         working-directory: src
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.build }}-box
+          path: src/*.box
+          retention-days: 1
       - run: mkdir test
       - run: vagrant plugin install --verbose vagrant-libvirt
         working-directory: test
