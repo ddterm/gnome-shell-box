@@ -25,6 +25,10 @@ on:
         required: false
 
 env:
+  # renovate: datasource=deb depName=packer
+  PACKER_VERSION: '1.13.1-1'
+  # renovate: datasource=deb depName=vagrant
+  VAGRANT_VERSION: '2.4.5-1'
   VAGRANT_BOX_UPDATE_CHECK_DISABLE: 1
   VAGRANT_CHECKPOINT_DISABLE: 1
   VAGRANT_FORCE_COLOR: 1
@@ -73,7 +77,16 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           | sudo tee /etc/apt/sources.list.d/hashicorp.list
       - run: sudo apt-get update
-      - run: sudo apt-get install -y --no-install-recommends packer qemu-system-x86 qemu-system-modules-spice qemu-utils vagrant libvirt-daemon-system libvirt-dev dnsmasq
+      - run: >-
+          sudo apt-get install -y --no-install-recommends
+          "packer=$PACKER_VERSION"
+          "vagrant=$VAGRANT_VERSION"
+          qemu-system-x86
+          qemu-system-modules-spice
+          qemu-utils
+          libvirt-daemon-system
+          libvirt-dev
+          dnsmasq
       - run: sudo apt-get clean -y
       - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
       - run: sudo docker image prune --all --force
