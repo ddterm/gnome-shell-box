@@ -111,7 +111,7 @@ jobs:
           sudo mkdir -p /etc/qemu
           echo "allow virbr0" | sudo tee /etc/qemu/bridge.conf
           sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
-      - run: vagrant up --no-tty
+      - run: vagrant up --no-tty --debug
         working-directory: test
       - id: virt_domain_name
         run: echo "virt_domain_name=$(virsh --connect=qemu:///session --quiet list --name)" >>"$GITHUB_OUTPUT"
