@@ -1,6 +1,6 @@
 source "qemu" "debian13" {
-  iso_url = "https://cdimage.debian.org/cdimage/trixie_di_rc1/amd64/iso-cd/debian-trixie-DI-rc1-amd64-netinst.iso"
-  iso_checksum = "file:https://cdimage.debian.org/cdimage/trixie_di_rc1/amd64/iso-cd/SHA256SUMS"
+  iso_url = "https://cdimage.debian.org/cdimage/trixie_di_rc2/amd64/iso-cd/debian-trixie-DI-rc2-amd64-netinst.iso"
+  iso_checksum = "file:https://cdimage.debian.org/cdimage/trixie_di_rc2/amd64/iso-cd/SHA256SUMS"
   vga = "virtio"
   cpus = 2
   memory = 4096
