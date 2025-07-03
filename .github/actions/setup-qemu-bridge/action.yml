@@ -1,0 +1,14 @@
+name: Setup QEMU Bridge
+description: Setup QEMU Bridge
+
+runs:
+  using: composite
+  steps:
+    - run: sudo mkdir -p /etc/qemu
+      shell: bash
+
+    - run: echo "allow virbr0" | sudo tee /etc/qemu/bridge.conf
+      shell: bash
+
+    - run: sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
+      shell: bash

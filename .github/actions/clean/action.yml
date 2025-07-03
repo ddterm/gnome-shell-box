@@ -1,0 +1,14 @@
+name: Free more disk space
+description: Free more disk space
+
+runs:
+  using: composite
+  steps:
+    - run: sudo apt-get clean -y
+      shell: bash
+
+    - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+      shell: bash
+
+    - run: sudo docker image prune --all --force
+      shell: bash

@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish to Vagrant Registry'
+        type: boolean
+        default: false
+        required: false
+
+  workflow_call:
+    inputs:
+      publish:
+        description: 'Publish to Vagrant Registry'
+        type: boolean
+        default: false
+        required: false
+
+    secrets:
+      HCP_CLIENT_SECRET:
+        description: 'HCP service principal client secret for publishing'
+        required: false
+
+env:
+  # renovate: datasource=deb depName=packer
+  PACKER_VERSION: '1.13.1-1'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      builds: ${{ steps.inspect.outputs.builds }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-hashicorp-repo
+      - run: sudo apt-get install -y --no-install-recommends "packer=$PACKER_VERSION"
+
+      - id: inspect
+        run: echo "builds=$(packer inspect . | jq -cRs '[scan("sources:\\s*qemu\\.(\\S+)")] | flatten')" >"$GITHUB_OUTPUT"
+
+  box:
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        build: ${{ fromJSON(needs.setup.outputs.builds) }}
+
+    uses: ./.github/workflows/box.yml
+    secrets: inherit
+    with:
+      name: ${{ matrix.build }}
+      publish: ${{ inputs.publish }}

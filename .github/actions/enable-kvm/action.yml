@@ -1,0 +1,14 @@
+name: Enable KVM
+description: Enable KVM
+
+runs:
+  using: composite
+  steps:
+    - run: echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+      shell: bash
+
+    - run: sudo udevadm control --reload-rules
+      shell: bash
+
+    - run: sudo udevadm trigger --name-match=kvm
+      shell: bash
