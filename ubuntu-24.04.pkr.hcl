@@ -49,6 +49,7 @@ build {
         "${path.root}/ovmf/edk2.License.txt",
         "${path.root}/ovmf/OvmfPkg.License.txt",
       ]
+      compression_level = 9
     }
 
     post-processor "vagrant-registry" {
