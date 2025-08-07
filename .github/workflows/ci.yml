@@ -24,7 +24,7 @@ on:
 
 env:
   # renovate: datasource=deb depName=packer
-  PACKER_VERSION: '1.13.1-1'
+  PACKER_VERSION: '1.14.1-1'
 
 defaults:
   run:
