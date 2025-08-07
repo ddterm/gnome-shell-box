@@ -134,7 +134,7 @@ jobs:
       - uses: ./.github/actions/enable-kvm
       - run: vagrant plugin install --verbose vagrant-libvirt
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: ${{ inputs.name }}-box
 
