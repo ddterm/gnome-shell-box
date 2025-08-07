@@ -67,12 +67,12 @@ jobs:
       - uses: ./.github/actions/enable-kvm
       - run: mkdir -p logs
 
-      - run: packer init .
+      - run: /usr/bin/packer init .
         env:
           PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: >-
-          packer build
+          /usr/bin/packer build
           ${{ !inputs.publish && '-except vagrant-registry' || '' }}
           -only "$BUILD_NAME"
           .
