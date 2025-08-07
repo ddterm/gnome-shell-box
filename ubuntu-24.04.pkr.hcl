@@ -1,5 +1,5 @@
 source "qemu" "ubuntu2404" {
-  iso_url = "https://releases.ubuntu.com/noble/ubuntu-24.04.2-desktop-amd64.iso"
+  iso_url = "https://releases.ubuntu.com/noble/ubuntu-24.04.3-desktop-amd64.iso"
   iso_checksum = "file:https://releases.ubuntu.com/noble/SHA256SUMS"
   vga = "virtio"
   cpus = 2
