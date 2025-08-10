@@ -28,12 +28,6 @@
       }
     },
     {
-      "matchFileNames": ["nixos.pkr.hcl"],
-      "major": {
-        "enabled": true
-      }
-    },
-    {
       "matchDepNames": ["vagrant", "packer"],
       "matchDatasources": ["deb"],
       "registryUrls": ["https://apt.releases.hashicorp.com?suite=noble&components=main&binaryArch=amd64"]

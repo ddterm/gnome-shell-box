@@ -1,32 +1,24 @@
-variable "nixos_channel" {
-  type = string
-  # renovate: datasource=endoflife-date depName=NixOS versioning=nixpkgs
-  default = "25.05"
+locals {
+  # renovate: datasource=custom.html depName=nixos versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)\.(?<patch>[0-9]+)\.[0-9a-f]+$ extractVersion=(^|/)nixos-minimal-(?<version>[^/]+)-x86_64-linux\.iso$ registryUrl=https://channels.nixos.org/nixos-25.05
+  nixos_build = "25.05.807900.fc756aa6f5d3"
 }
 
+local "nixos_channel" {
+  expression = regex("^[0-9]+\\.[0-9]+", local.nixos_build)
+}
+
+local "nixos_iso_url" {
+  expression = "https://releases.nixos.org/nixos/${local.nixos_channel}/nixos-${local.nixos_build}/nixos-minimal-${local.nixos_build}-x86_64-linux.iso"
+}
+
+# https://github.com/hashicorp/go-getter/issues/396
 data "http" "nixos_iso_checksum" {
-  url = "https://channels.nixos.org/nixos-${var.nixos_channel}/latest-nixos-minimal-x86_64-linux.iso.sha256"
-}
-
-local "nixos_iso_checksum_split" {
-  expression = compact(split(" ", data.http.nixos_iso_checksum.body))
-}
-
-local "nixos_iso_checksum" {
-  expression = trimspace(local.nixos_iso_checksum_split[0])
-}
-
-local "nixos_iso_name" {
-  expression = trimspace(local.nixos_iso_checksum_split[1])
-}
-
-local "nixos_iso_dir" {
-  expression = regex_replace(local.nixos_iso_name, "nixos-minimal-(.*)-x86_64-linux.iso", "nixos-$1")
+  url = "${local.nixos_iso_url}.sha256"
 }
 
 source "qemu" "nixos" {
-  iso_url = "https://releases.nixos.org/nixos/${var.nixos_channel}/${local.nixos_iso_dir}/${local.nixos_iso_name}"
-  iso_checksum = "sha256:${local.nixos_iso_checksum}"
+  iso_url = "${local.nixos_iso_url}"
+  iso_checksum = "sha256:${split(" ", data.http.nixos_iso_checksum.body)[0]}"
   vga = "virtio"
   cpus = 2
   memory = 4096
@@ -84,7 +76,7 @@ build {
   }
 
   provisioner "file" {
-    content = templatefile("${path.root}/nix/configuration.nix", { path = path, state_version = var.nixos_channel })
+    content = templatefile("${path.root}/nix/configuration.nix", { path = path, state_version = local.nixos_channel })
     destination = "/mnt/etc/nixos/configuration.nix"
   }
 
