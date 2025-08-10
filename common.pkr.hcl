@@ -1,15 +1,18 @@
 packer {
   required_plugins {
     qemu = {
+      # renovate: datasource=github-tags depName=hashicorp/packer-plugin-qemu versioning=hashicorp
       version = "=1.1.4"
       source  = "github.com/hashicorp/qemu"
     }
     vagrant = {
+      # renovate: datasource=github-tags depName=hashicorp/packer-plugin-vagrant versioning=hashicorp
       version = "=1.1.6"
       source = "github.com/hashicorp/vagrant"
     }
     external = {
-      version = "= 0.0.3"
+      # renovate: datasource=github-tags depName=joomcode/packer-plugin-external versioning=hashicorp
+      version = "=0.0.3"
       source  = "github.com/joomcode/external"
     }
   }

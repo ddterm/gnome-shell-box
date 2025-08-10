@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/
+  alpine320_version = "3.20.7"
+}
+
 source "qemu" "alpine320" {
-  iso_url = "https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/alpine-virt-3.20.7-x86_64.iso"
-  iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/alpine-virt-3.20.7-x86_64.iso.sha256"
+  iso_url = "https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/alpine-virt-${local.alpine320_version}-x86_64.iso"
+  iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/alpine-virt-${local.alpine320_version}-x86_64.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 4096

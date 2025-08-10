@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=openSUSE-Leap-NET-x86_64 versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)-NET-x86_64-Build(?<patch>[0-9]+)\.(?<revision>[0-9]+)$ extractVersion=(^|/)openSUSE-Leap-(?<version>[^/]+)-Media\.iso$ registryUrl=https://download.opensuse.org/distribution/leap/15.6/iso/
+  opensuseleap156_version = "15.6-NET-x86_64-Build710.3"
+}
+
 source "qemu" "opensuseleap156" {
-  iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build710.3-Media.iso"
-  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Build710.3-Media.iso.sha256"
+  iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-${local.opensuseleap156_version}-Media.iso"
+  iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-${local.opensuseleap156_version}-Media.iso.sha256"
   vga = "virtio"
   cpus = 2
   memory = 4096

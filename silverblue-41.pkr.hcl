@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[0-9.-]+)\.iso$ registryUrl=https://download.fedoraproject.org/pub/fedora/linux/releases/41/Silverblue/x86_64/iso/
+  silverblue41_version = "41-1.4"
+}
+
 source "qemu" "silverblue41" {
-  iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/41/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-41-1.4.iso"
-  iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/41/Silverblue/x86_64/iso/Fedora-Silverblue-41-1.4-x86_64-CHECKSUM"
+  iso_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/41/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-${local.silverblue41_version}.iso"
+  iso_checksum = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/41/Silverblue/x86_64/iso/Fedora-Silverblue-${local.silverblue41_version}-x86_64-CHECKSUM"
   vga = "virtio"
   cpus = 2
   memory = 4096

@@ -1,5 +1,6 @@
 variable "nixos_channel" {
   type = string
+  # renovate: datasource=endoflife-date depName=NixOS versioning=nixpkgs
   default = "25.05"
 }
 

@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=archlinux-iso versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://geo.mirror.pkgbuild.com/iso/
+  archlinux_version = "2025.08.01"
+}
+
 source "qemu" "archlinux" {
-  iso_url = "https://geo.mirror.pkgbuild.com/iso/2025.08.01/archlinux-2025.08.01-x86_64.iso"
-  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/2025.08.01/sha256sums.txt"
+  iso_url = "https://geo.mirror.pkgbuild.com/iso/${local.archlinux_version}/archlinux-${local.archlinux_version}-x86_64.iso"
+  iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/${local.archlinux_version}/sha256sums.txt"
   vga = "virtio"
   cpus = 2
   memory = 4096

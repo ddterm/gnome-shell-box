@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
+  ubuntu2404_version = "24.04.3"
+}
+
 source "qemu" "ubuntu2404" {
-  iso_url = "https://releases.ubuntu.com/noble/ubuntu-24.04.3-desktop-amd64.iso"
-  iso_checksum = "file:https://releases.ubuntu.com/noble/SHA256SUMS"
+  iso_url = "https://releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
+  iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
   vga = "virtio"
   cpus = 2
   memory = 4096

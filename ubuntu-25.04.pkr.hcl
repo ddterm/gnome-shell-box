@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
+  ubuntu2504_version = "25.04"
+}
+
 source "qemu" "ubuntu2504" {
-  iso_url = "https://releases.ubuntu.com/25.04/ubuntu-25.04-desktop-amd64.iso"
-  iso_checksum = "file:https://releases.ubuntu.com/25.04/SHA256SUMS"
+  iso_url = "https://releases.ubuntu.com/${local.ubuntu2504_version}/ubuntu-${local.ubuntu2504_version}-desktop-amd64.iso"
+  iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2504_version}/SHA256SUMS"
   vga = "virtio"
   cpus = 2
   memory = 4096
