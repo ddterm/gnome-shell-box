@@ -46,4 +46,9 @@ Vagrant.configure(2) do |config|
   if /^alpine\d+$/ =~ '{{build_name}}'
     config.ssh.sudo_command = 'doas -n -u root %c'
   end
+
+  # https://github.com/hashicorp/vagrant/issues/13688
+  if 'nixos' == '{{build_name}}'
+    config.vm.allow_fstab_modification = false
+  end
 end
