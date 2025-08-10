@@ -1,6 +1,11 @@
+locals {
+  # renovate: datasource=custom.html depName=debian-release extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://cdimage.debian.org/cdimage/release/
+  debian13_version = "13.0.0"
+}
+
 source "qemu" "debian13" {
-  iso_url = "https://cdimage.debian.org/cdimage/trixie_di_rc2/amd64/iso-cd/debian-trixie-DI-rc2-amd64-netinst.iso"
-  iso_checksum = "file:https://cdimage.debian.org/cdimage/trixie_di_rc2/amd64/iso-cd/SHA256SUMS"
+  iso_url = "https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/debian-${local.debian13_version}-amd64-netinst.iso"
+  iso_checksum = "file:https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/SHA256SUMS"
   vga = "virtio"
   cpus = 2
   memory = 4096
