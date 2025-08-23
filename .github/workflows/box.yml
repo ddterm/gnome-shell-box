@@ -36,7 +36,7 @@ env:
   # renovate: datasource=deb depName=packer
   PACKER_VERSION: '1.14.1-1'
   # renovate: datasource=deb depName=vagrant
-  VAGRANT_VERSION: '2.4.8-1'
+  VAGRANT_VERSION: '2.4.9-1'
 
 defaults:
   run:
