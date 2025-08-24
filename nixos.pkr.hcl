@@ -100,7 +100,7 @@ build {
     }
 
     post-processor "vagrant-registry" {
-      box_tag = "gnome-shell-box/nixos"
+      box_tag = "gnome-shell-box/${source.name}"
       version = local.version
     }
   }

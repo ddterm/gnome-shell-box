@@ -3,19 +3,14 @@ locals {
   debian13_version = "13.0.0"
 }
 
-source "qemu" "debian13" {
-  iso_url = "https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/debian-${local.debian13_version}-amd64-netinst.iso"
-  iso_checksum = "file:https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/SHA256SUMS"
+source "qemu" "debian" {
   vga = "virtio"
   cpus = 2
   memory = 4096
   headless = var.headless
-  shutdown_command = "shutdown -P now"
   qmp_enable = var.headless
+  shutdown_command = "shutdown -P now"
   disk_discard = "unmap"
-  http_content = {
-    "/debian-preseed.cfg" = templatefile("${path.root}/debian-preseed.cfg", { path = path, hostname = "debian13" })
-  }
   ssh_timeout = "1h"
   ssh_username = "root"
   ssh_password = "vagrant"
@@ -35,9 +30,15 @@ source "qemu" "debian13" {
 }
 
 build {
-  sources = [
-    "source.qemu.debian13"
-  ]
+  source "qemu.debian" {
+    name = "debian13"
+    output_directory = "output-${source.name}"
+    iso_url = "https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/debian-${local.debian13_version}-amd64-netinst.iso"
+    iso_checksum = "file:https://cdimage.debian.org/cdimage/release/${local.debian13_version}/amd64/iso-cd/SHA256SUMS"
+    http_content = {
+      "/debian-preseed.cfg" = templatefile("${path.root}/debian-preseed.cfg", { path = path, hostname = source.name })
+    }
+  }
 
   provisioner "shell" {
     inline = [
@@ -98,7 +99,7 @@ build {
     }
 
     post-processor "vagrant-registry" {
-      box_tag = "gnome-shell-box/debian13"
+      box_tag = "gnome-shell-box/${source.name}"
       version = local.version
     }
   }

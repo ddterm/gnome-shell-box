@@ -46,7 +46,7 @@ jobs:
       - run: sudo apt-get install -y --no-install-recommends "packer=$PACKER_VERSION"
 
       - id: inspect
-        run: echo "builds=$(packer inspect . | jq -cRs '[scan("sources:\\s*qemu\\.(\\S+)")] | flatten')" >"$GITHUB_OUTPUT"
+        run: echo "builds=$(packer inspect . | jq -cRs '[scan("\\sqemu\\.(\\S+)")] | flatten')" >"$GITHUB_OUTPUT"
 
   box:
     needs: setup

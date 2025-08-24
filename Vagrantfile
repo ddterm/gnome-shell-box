@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
 
-  if /^alpine\d+$/ =~ '{{build_name}}'
+  if /^alpine\d*$/ =~ '{{build_name}}'
     config.ssh.sudo_command = 'doas -n -u root %c'
   end
 

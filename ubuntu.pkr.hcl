@@ -1,21 +1,18 @@
 locals {
   # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
   ubuntu2404_version = "24.04.3"
+  # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
+  ubuntu2504_version = "25.04"
 }
 
-source "qemu" "ubuntu2404" {
-  iso_url = "https://releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
-  iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
+source "qemu" "ubuntu" {
   vga = "virtio"
   cpus = 2
   memory = 4096
   headless = var.headless
-  shutdown_command = "sudo shutdown -P now"
   qmp_enable = var.headless
+  shutdown_command = "sudo shutdown -P now"
   disk_discard = "unmap"
-  http_content = {
-    "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = "ubuntu2404" })
-  }
   ssh_timeout = "1h"
   ssh_username = "vagrant"
   ssh_password = "vagrant"
@@ -34,9 +31,25 @@ source "qemu" "ubuntu2404" {
 }
 
 build {
-  sources = [
-    "source.qemu.ubuntu2404"
-  ]
+  source "qemu.ubuntu" {
+    name = "ubuntu2404"
+    output_directory = "output-${source.name}"
+    iso_url = "https://releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
+    iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
+    http_content = {
+      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
+    }
+  }
+
+  source "qemu.ubuntu" {
+    name = "ubuntu2504"
+    output_directory = "output-${source.name}"
+    iso_url = "https://releases.ubuntu.com/${local.ubuntu2504_version}/ubuntu-${local.ubuntu2504_version}-desktop-amd64.iso"
+    iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2504_version}/SHA256SUMS"
+    http_content = {
+      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
+    }
+  }
 
   provisioner "shell" {
     inline = [
@@ -58,7 +71,7 @@ build {
     }
 
     post-processor "vagrant-registry" {
-      box_tag = "gnome-shell-box/ubuntu2404"
+      box_tag = "gnome-shell-box/${source.name}"
       version = local.version
     }
   }
