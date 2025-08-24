@@ -129,6 +129,7 @@ jobs:
           libvirt-daemon-system
           libvirt-dev
           dnsmasq
+          imagemagick
 
       - uses: ./.github/actions/clean
       - uses: ./.github/actions/enable-kvm
@@ -155,11 +156,17 @@ jobs:
       - id: virt_domain_name
         run: echo "virt_domain_name=$(virsh --connect=qemu:///session --quiet list --name)" >>"$GITHUB_OUTPUT"
 
+      - run: sleep 30
+
       - run: virsh --connect=qemu:///session screenshot "$VIRT_DOMAIN_NAME" --file logs/screenshot.png
         env:
           VIRT_DOMAIN_NAME: ${{ steps.virt_domain_name.outputs.virt_domain_name }}
 
       - run: vagrant destroy --force --graceful
+
+      - run: compare -crop '1280x768+0+32' logs/screenshot.png "$REF_IMAGE" logs/screenshot-diff.png
+        env:
+          REF_IMAGE: test/ref/${{ inputs.name }}.png
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
