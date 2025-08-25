@@ -80,7 +80,7 @@ build {
       vagrantfile_template = "Vagrantfile"
       include = [
         "${path.root}/ovmf/OVMF_CODE.4m.fd",
-        "${path.root}/output-${source.name}/efivars.fd",
+        "output-${source.name}/efivars.fd",
         "${path.root}/ovmf/edk2.License.txt",
         "${path.root}/ovmf/OvmfPkg.License.txt",
       ]
