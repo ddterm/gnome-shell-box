@@ -38,6 +38,7 @@ variable "log_dir" {
 
 data "external-raw" "git-describe" {
   program = ["git", "describe", "--tags"]
+  working_dir = path.root
 }
 
 locals {
