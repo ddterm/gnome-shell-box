@@ -26,8 +26,8 @@ source "qemu" "alpine" {
     "setup-interfaces -a -r && ",
     "setup-sshd -k 'http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant.pub' openssh<enter>",
   ]
-  efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
-  efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
+  efi_firmware_code = local.efi_firmware_code
+  efi_firmware_vars = local.efi_firmware_vars
   qemuargs = [["-serial", "stdio"]]
   machine_type = var.machine_type
 }
@@ -120,12 +120,10 @@ build {
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
-      include = [
-        "${path.root}/ovmf/OVMF_CODE.4m.fd",
+      include = flatten([
+        local.ovmf_include,
         "output-${source.name}/efivars.fd",
-        "${path.root}/ovmf/edk2.License.txt",
-        "${path.root}/ovmf/OvmfPkg.License.txt",
-      ]
+      ])
       compression_level = 9
     }
 

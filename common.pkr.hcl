@@ -43,4 +43,14 @@ data "external-raw" "git-describe" {
 
 locals {
   version = trimspace(data.external-raw.git-describe.result)
+  efi_firmware_code = "${path.root}/ovmf/OVMF_CODE.4m.fd"
+  efi_firmware_vars = "${path.root}/ovmf/OVMF_VARS.4m.fd"
+}
+
+local "ovmf_include" {
+  expression = [
+    local.efi_firmware_code,
+    "${path.root}/ovmf/edk2.License.txt",
+    "${path.root}/ovmf/OvmfPkg.License.txt",
+  ]
 }
