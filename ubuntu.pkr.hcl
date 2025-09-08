@@ -51,6 +51,16 @@ build {
     }
   }
 
+  source "qemu.ubuntu" {
+    name = "ubuntu2510"
+    output_directory = "output-${source.name}"
+    iso_url = "https://cdimage.ubuntu.com/daily-live/current/questing-desktop-amd64.iso"
+    iso_checksum = "file:https://cdimage.ubuntu.com/daily-live/current/SHA256SUMS"
+    http_content = {
+      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
+    }
+  }
+
   provisioner "shell" {
     inline = [
       "sudo apt-get clean -y",
