@@ -21,7 +21,7 @@ source "qemu" "nixos" {
   iso_checksum = "sha256:${split(" ", data.http.nixos_iso_checksum.body)[0]}"
   vga = "virtio"
   cpus = 2
-  memory = 4096
+  memory = 8192
   headless = var.headless
   shutdown_command = "sudo shutdown -P now"
   qmp_enable = var.headless

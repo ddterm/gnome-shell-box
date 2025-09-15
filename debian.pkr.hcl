@@ -6,7 +6,7 @@ locals {
 source "qemu" "debian" {
   vga = "virtio"
   cpus = 2
-  memory = 4096
+  memory = 8192
   headless = var.headless
   qmp_enable = var.headless
   shutdown_command = "shutdown -P now"

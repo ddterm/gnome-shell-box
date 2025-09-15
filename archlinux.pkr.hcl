@@ -8,7 +8,7 @@ source "qemu" "archlinux" {
   iso_checksum = "file:https://geo.mirror.pkgbuild.com/iso/${local.archlinux_version}/sha256sums.txt"
   vga = "virtio"
   cpus = 2
-  memory = 4096
+  memory = 8192
   headless = var.headless
   shutdown_command = "/sbin/poweroff"
   qmp_enable = var.headless

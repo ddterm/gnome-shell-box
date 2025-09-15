@@ -1,6 +1,6 @@
 Vagrant.configure(2) do |config|
   config.vm.provider :libvirt do |libvirt; box_dir|
-    libvirt.memory = 4096
+    libvirt.memory = 8192
 
     if File.exist?('/dev/kvm')
       libvirt.driver = 'kvm'

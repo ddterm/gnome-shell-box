@@ -22,7 +22,7 @@ local "opensusetumbleweed_iso_name" {
 source "qemu" "opensuse" {
   vga = "virtio"
   cpus = 2
-  memory = 4096
+  memory = 8192
   headless = var.headless
   qmp_enable = var.headless
   shutdown_command = "sudo /sbin/halt -h -p"
