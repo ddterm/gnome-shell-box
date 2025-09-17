@@ -1,6 +1,6 @@
 locals {
   # renovate: datasource=custom.html depName=nixos versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)\.(?<patch>[0-9]+)\.[0-9a-f]+$ extractVersion=(^|/)nixos-minimal-(?<version>[^/]+)-x86_64-linux\.iso$ registryUrl=https://channels.nixos.org/nixos-25.05
-  nixos_build = "25.05.809711.8cd5ce828d5d"
+  nixos_build = "25.05.809980.e9b7f2ff62b3"
 }
 
 local "nixos_channel" {
