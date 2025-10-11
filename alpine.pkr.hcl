@@ -1,12 +1,12 @@
 locals {
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.19/releases/x86_64/
-  alpine319_version = "3.19.8"
+  alpine319_version = "3.19.9"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/
-  alpine320_version = "3.20.7"
+  alpine320_version = "3.20.8"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.21/releases/x86_64/
-  alpine321_version = "3.21.4"
+  alpine321_version = "3.21.5"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.22/releases/x86_64/
-  alpine322_version = "3.22.1"
+  alpine322_version = "3.22.2"
 }
 
 source "qemu" "alpine" {
