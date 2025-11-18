@@ -34,7 +34,7 @@ on:
 
 env:
   # renovate: datasource=deb depName=packer
-  PACKER_VERSION: '1.14.2-1'
+  PACKER_VERSION: '1.14.3-1'
   # renovate: datasource=deb depName=vagrant
   VAGRANT_VERSION: '2.4.9-1'
 
