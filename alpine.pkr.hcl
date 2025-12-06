@@ -7,6 +7,8 @@ locals {
   alpine321_version = "3.21.5"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.22/releases/x86_64/
   alpine322_version = "3.22.2"
+  # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.23/releases/x86_64/
+  alpine323_version = "3.23.0"
 }
 
 source "qemu" "alpine" {
@@ -71,6 +73,17 @@ build {
     output_directory = "output-${source.name}"
     iso_url = "https://mirrors.edge.kernel.org/alpine/v3.22/releases/x86_64/alpine-virt-${local.alpine322_version}-x86_64.iso"
     iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.22/releases/x86_64/alpine-virt-${local.alpine322_version}-x86_64.iso.sha256"
+    http_content = {
+      "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = source.name })
+      "/vagrant.pub" = file("${path.root}/keys/vagrant.pub")
+    }
+  }
+
+  source "qemu.alpine" {
+    name = "alpine323"
+    output_directory = "output-${source.name}"
+    iso_url = "https://mirrors.edge.kernel.org/alpine/v3.23/releases/x86_64/alpine-virt-${local.alpine323_version}-x86_64.iso"
+    iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.23/releases/x86_64/alpine-virt-${local.alpine323_version}-x86_64.iso.sha256"
     http_content = {
       "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = source.name })
       "/vagrant.pub" = file("${path.root}/keys/vagrant.pub")
