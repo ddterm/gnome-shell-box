@@ -8,7 +8,7 @@ locals {
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.22/releases/x86_64/
   alpine322_version = "3.22.2"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.23/releases/x86_64/
-  alpine323_version = "3.23.0"
+  alpine323_version = "3.23.2"
 }
 
 source "qemu" "alpine" {
