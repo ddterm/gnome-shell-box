@@ -48,17 +48,6 @@
       <timeout config:type="integer">10</timeout>
     </yesno_messages>
   </report>
-  <scripts>
-    <chroot-scripts config:type="list">
-      <script>
-        <chrooted config:type="boolean">true</chrooted>
-        <source>
-echo 'vagrant ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/vagrant
-chmod 0440 /etc/sudoers.d/vagrant
-        </source>
-      </script>
-    </chroot-scripts>
-  </scripts>
   <services-manager>
     <default_target>graphical</default_target>
     <services>
@@ -119,4 +108,16 @@ chmod 0440 /etc/sudoers.d/vagrant
       <userlist>vagrant</userlist>
     </group>
   </groups>
+  <files config:type="list">
+    <file>
+      <file_path>/etc/sudoers.d/vagrant</file_path>
+      <file_contents>vagrant ALL=(ALL:ALL) NOPASSWD: ALL</file_contents>
+      <file_permissions>440</file_permissions>
+    </file>
+    <file>
+      <file_path>/etc/ssh/sshd_config.d/rootlogin.conf</file_path>
+      <file_contents>PermitRootLogin yes</file_contents>
+      <file_permissions>644</file_permissions>
+    </file>
+  </files>
 </profile>

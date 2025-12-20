@@ -1,0 +1,63 @@
+{
+  "product": {
+    "id": ${jsonencode(product)}
+  },
+  "hostname": {
+    "static": ${jsonencode(hostname)}
+  },
+  "root": {
+    "sshPublicKey": ${jsonencode(file("${path.root}/keys/vagrant.pub"))},
+    "password": "vagrant",
+    "hashedPassword": false
+  },
+  "user": {
+    "fullName": "Vagrant",
+    "userName": "vagrant",
+    "password": "vagrant",
+    "hashedPassword": false
+  },
+  "localization": {
+    "language": "en_US.UTF-8",
+    "keyboard": "us",
+    "timezone": "UTC"
+  },
+  "software": {
+    "patterns": {
+      "add": ["gnome"]
+    },
+    "packages": ["spice-vdagent", "qemu-guest-agent", "spice-webdavd"]
+  },
+  "storage": {
+    "drives": [
+      {
+        "partitions": [
+          {
+            "generate": "default"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": {
+    "policy": "auto"
+  },
+  "files": [
+    {
+      "destination": "/home/vagrant/.ssh/authorized_keys",
+      "permissions": "0600",
+      "user": "vagrant",
+      "group": "vagrant",
+      "content": ${jsonencode(file("${path.root}/keys/vagrant.pub"))}
+    },
+    {
+      "destination": "/etc/sudoers.d/vagrant",
+      "permissions": "0440",
+      "content": "vagrant ALL=(ALL:ALL) NOPASSWD: ALL"
+    },
+    {
+      "destination": "/etc/ssh/sshd_config.d/rootlogin.conf",
+      "permissions": "0644",
+      "content": "PermitRootLogin yes"
+    }
+  ]
+}
