@@ -1,6 +1,4 @@
 locals {
-  # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.19/releases/x86_64/
-  alpine319_version = "3.19.9"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.20/releases/x86_64/
   alpine320_version = "3.20.8"
   # renovate: datasource=custom.html depName=alpine-virt-x86_64 extractVersion=(^|/)alpine-virt-(?<version>[0-9.]+)-x86_64\.iso$ registryUrl=https://mirrors.edge.kernel.org/alpine/v3.21/releases/x86_64/
@@ -35,17 +33,6 @@ source "qemu" "alpine" {
 }
 
 build {
-  source "qemu.alpine" {
-    name = "alpine319"
-    output_directory = "output-${source.name}"
-    iso_url = "https://mirrors.edge.kernel.org/alpine/v3.19/releases/x86_64/alpine-virt-${local.alpine319_version}-x86_64.iso"
-    iso_checksum = "file:https://mirrors.edge.kernel.org/alpine/v3.19/releases/x86_64/alpine-virt-${local.alpine319_version}-x86_64.iso.sha256"
-    http_content = {
-      "/alpine-answer.sh" = templatefile("${path.root}/alpine-answer.sh", { path = path, hostname = source.name })
-      "/vagrant.pub" = file("${path.root}/keys/vagrant.pub")
-    }
-  }
-
   source "qemu.alpine" {
     name = "alpine320"
     output_directory = "output-${source.name}"
