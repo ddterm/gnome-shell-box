@@ -27,8 +27,8 @@ source "qemu" "fedora" {
   boot_command = [
     "c<wait10>",
     "set gfxpayload=keep<enter><wait>",
-    "linux /images/pxeboot/vmlinuz console=ttyS0 inst.notmux inst.cmdline ",
-    "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/fedora.ks<enter><wait>",
+    "linux /images/pxeboot/vmlinuz console=ttyS0 systemd.journald.forward_to_console=1 ",
+    "inst.notmux inst.cmdline inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/fedora.ks<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait10>",
     "boot<enter>"
   ]

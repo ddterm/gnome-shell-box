@@ -17,7 +17,7 @@ source "qemu" "debian" {
   boot_command = [
     "c<wait10>",
     "set gfxpayload=keep<enter><wait>",
-    "linux /install.amd/vmlinuz console=ttyS0 ",
+    "linux /install.amd/vmlinuz console=ttyS0 systemd.journald.forward_to_console=1 ",
     "auto=true DEBIAN_FRONTEND=text TERM=dumb priority=critical keymap=en ",
     "url=http://{{.HTTPIP}}:{{.HTTPPort}}/debian-preseed.cfg --- <enter><wait>",
     "initrd /install.amd/initrd.gz<enter><wait>",

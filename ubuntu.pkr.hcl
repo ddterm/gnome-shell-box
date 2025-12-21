@@ -21,7 +21,7 @@ source "qemu" "ubuntu" {
   boot_command = [
     "c<wait10>",
     "set gfxpayload=keep<enter><wait>",
-    "linux /casper/vmlinuz autoinstall console=ttyS0 ",
+    "linux /casper/vmlinuz autoinstall console=ttyS0 systemd.journald.forward_to_console=1 ",
     "cloud-config-url=\"http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu-autoinstall.yml\" --- <enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
