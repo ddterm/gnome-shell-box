@@ -30,7 +30,7 @@ source "qemu" "alpine" {
   ]
   efi_firmware_code = local.efi_firmware_code
   efi_firmware_vars = local.efi_firmware_vars
-  qemuargs = [["-serial", "stdio"]]
+  qemuargs = [["-cpu", "host"], ["-serial", "stdio"]]
   machine_type = var.machine_type
 }
 
