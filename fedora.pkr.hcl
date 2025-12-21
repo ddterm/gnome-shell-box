@@ -7,10 +7,10 @@ locals {
   fedora42_version = "42-1.1"
   # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[0-9.-]+)\.iso$ registryUrl=https://download.fedoraproject.org/pub/fedora/linux/releases/42/Silverblue/x86_64/iso/
   silverblue42_version = "42-1.1"
-  # renovate: datasource=custom.html depName=Fedora-Everything-netinst-x86_64 versioning=regex:^(?<major>[0-9]+)_Beta-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Everything-netinst-x86_64-(?<version>[0-9_Beta.-]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Everything/x86_64/iso/
-  fedora43_version = "43_Beta-1.3"
-  # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)_Beta-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[0-9_Beta.-]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Silverblue/x86_64/iso/
-  silverblue43_version = "43_Beta-1.3"
+  # renovate: datasource=custom.html depName=Fedora-Everything-netinst-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Everything-netinst-x86_64-(?<version>[0-9.-]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/iso/
+  fedora43_version = "43-1.6"
+  # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[0-9.-]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Silverblue/x86_64/iso/
+  silverblue43_version = "43-1.6"
 }
 
 source "qemu" "fedora" {
@@ -82,8 +82,8 @@ build {
   source "qemu.fedora" {
     name = "fedora43"
     output_directory = "output-${source.name}"
-    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-${local.fedora43_version}.iso"
-    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Everything/x86_64/iso/Fedora-Everything-iso-${local.fedora43_version}-x86_64-CHECKSUM"
+    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-${local.fedora43_version}.iso"
+    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/iso/Fedora-Everything-${local.fedora43_version}-x86_64-CHECKSUM"
     http_content = {
       "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = source.name })
     }
@@ -92,8 +92,8 @@ build {
   source "qemu.fedora" {
     name = "silverblue43"
     output_directory = "output-${source.name}"
-    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-${local.silverblue43_version}.iso"
-    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/test/43_Beta/Silverblue/x86_64/iso/Fedora-Silverblue-iso-${local.silverblue43_version}-x86_64-CHECKSUM"
+    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-${local.silverblue43_version}.iso"
+    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Silverblue/x86_64/iso/Fedora-Silverblue-${local.silverblue43_version}-x86_64-CHECKSUM"
     http_content = {
       "/fedora.ks" = templatefile("${path.root}/fedora-silverblue.ks", { path = path, hostname = source.name, version = "43" })
     }
