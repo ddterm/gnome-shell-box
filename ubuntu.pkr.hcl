@@ -2,8 +2,6 @@ locals {
   # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
   ubuntu2404_version = "24.04.3"
   # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
-  ubuntu2504_version = "25.04"
-  # renovate: datasource=custom.html depName=ubuntu-release versioning=ubuntu extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
   ubuntu2510_version = "25.10"
 }
 
@@ -38,16 +36,6 @@ build {
     output_directory = "output-${source.name}"
     iso_url = "https://releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
     iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
-    http_content = {
-      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
-    }
-  }
-
-  source "qemu.ubuntu" {
-    name = "ubuntu2504"
-    output_directory = "output-${source.name}"
-    iso_url = "https://releases.ubuntu.com/${local.ubuntu2504_version}/ubuntu-${local.ubuntu2504_version}-desktop-amd64.iso"
-    iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2504_version}/SHA256SUMS"
     http_content = {
       "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
     }
