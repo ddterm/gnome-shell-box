@@ -7,6 +7,10 @@ locals {
   fedora43_version = "43-1.6"
   # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[0-9.-]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Silverblue/x86_64/iso/
   silverblue43_version = "43-1.6"
+  # renovate: datasource=custom.html depName=Fedora-Everything-netinst-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Everything-netinst-x86_64-(?<version>[^/]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/iso/
+  fedora44_version = "44-1.7"
+  # renovate: datasource=custom.html depName=Fedora-Silverblue-ostree-x86_64 versioning=regex:^(?<major>[0-9]+)-(?<minor>[0-9]+)\.(?<patch>[0-9]+)$ extractVersion=(^|/)Fedora-Silverblue-ostree-x86_64-(?<version>[^/]+)\.iso$ registryUrl=https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Silverblue/x86_64/iso/
+  silverblue44_version = "44-1.7"
 }
 
 source "qemu" "fedora" {
@@ -72,6 +76,26 @@ build {
     iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Silverblue/x86_64/iso/Fedora-Silverblue-${local.silverblue43_version}-x86_64-CHECKSUM"
     http_content = {
       "/fedora.ks" = templatefile("${path.root}/fedora-silverblue.ks", { path = path, hostname = source.name, version = "43" })
+    }
+  }
+
+  source "qemu.fedora" {
+    name = "fedora44"
+    output_directory = "output-${source.name}"
+    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-${local.fedora44_version}.iso"
+    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/iso/Fedora-Everything-${local.fedora44_version}-x86_64-CHECKSUM"
+    http_content = {
+      "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = source.name })
+    }
+  }
+
+  source "qemu.fedora" {
+    name = "silverblue44"
+    output_directory = "output-${source.name}"
+    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Silverblue/x86_64/iso/Fedora-Silverblue-ostree-x86_64-${local.silverblue44_version}.iso"
+    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Silverblue/x86_64/iso/Fedora-Silverblue-${local.silverblue44_version}-x86_64-CHECKSUM"
+    http_content = {
+      "/fedora.ks" = templatefile("${path.root}/fedora-silverblue.ks", { path = path, hostname = source.name, version = "44" })
     }
   }
 
