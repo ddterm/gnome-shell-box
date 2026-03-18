@@ -51,6 +51,16 @@ build {
     }
   }
 
+  source "qemu.ubuntu" {
+    name = "ubuntu2604"
+    output_directory = "output-${source.name}"
+    iso_url = "https://releases.ubuntu.com/26.04/ubuntu-26.04-beta-desktop-amd64.iso"
+    iso_checksum = "file:https://releases.ubuntu.com/26.04/SHA256SUMS"
+    http_content = {
+      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
+    }
+  }
+
   provisioner "shell" {
     inline = [
       "sudo apt-get clean -y",
