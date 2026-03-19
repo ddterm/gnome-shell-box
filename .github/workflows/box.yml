@@ -73,7 +73,7 @@ jobs:
 
       - run: >-
           /usr/bin/packer build
-          ${{ !inputs.publish && '-except vagrant-registry' || '' }}
+          ${{ case(inputs.publish, '', '-except vagrant-registry') }}
           -only "$BUILD_NAME"
           .
           2>&1 | tee logs/packer.txt
