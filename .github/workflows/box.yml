@@ -161,15 +161,31 @@ jobs:
 
       - run: sleep 30
 
-      - run: virsh --connect=qemu:///session screenshot "$VIRT_DOMAIN_NAME" --file logs/screenshot.png
+      - id: screenshot
+        run: virsh --connect=qemu:///session screenshot "$VIRT_DOMAIN_NAME" --file "$SCREENSHOT"
         env:
           VIRT_DOMAIN_NAME: ${{ steps.virt_domain_name.outputs.virt_domain_name }}
+          SCREENSHOT: logs/${{ inputs.name }}.png
 
       - run: vagrant destroy --force --graceful
 
-      - run: compare -crop '1280x768+0+32' logs/screenshot.png "$REF_IMAGE" logs/screenshot-diff.png
+      - run: compare -crop '1280x768+0+32' "$SCREENSHOT" "$REF_IMAGE" "$SCREENSHOT_DIFF"
         env:
           REF_IMAGE: test/ref/${{ inputs.name }}.png
+          SCREENSHOT: logs/${{ inputs.name }}.png
+          SCREENSHOT_DIFF: logs/${{ inputs.name }}-diff.png
+
+      - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          path: logs/${{ inputs.name }}.png
+          archive: false
+        if: ${{ always() && steps.screenshot.outcome == 'success' }}
+
+      - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          path: logs/${{ inputs.name }}-diff.png
+          archive: false
+        if: ${{ always() && steps.screenshot.outcome == 'success' }}
 
       - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
