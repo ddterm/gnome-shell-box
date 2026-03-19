@@ -99,7 +99,7 @@ jobs:
         with:
           name: ${{ inputs.name }}-build-logs
           path: logs
-        if: ${{ !cancelled() }}
+        if: ${{ always() }}
 
   test:
     name: test ${{ inputs.name }}
@@ -191,4 +191,4 @@ jobs:
         with:
           name: ${{ inputs.name }}-test-logs
           path: logs
-        if: ${{ !cancelled() }}
+        if: ${{ always() }}
