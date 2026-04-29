@@ -1,6 +1,4 @@
 locals {
-  # renovate: datasource=custom.html depName=openSUSE-Leap-NET-x86_64 versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)-NET-x86_64-Build(?<patch>[0-9]+)\.(?<revision>[0-9]+)$ extractVersion=(^|/)openSUSE-Leap-(?<version>[^/]+)-Media\.iso$ registryUrl=https://download.opensuse.org/distribution/leap/15.6/iso/
-  opensuseleap156_version = "15.6-NET-x86_64-Build710.3"
   # renovate: datasource=custom.html depName=openSUSE-Leap-16.0-online-installer-x86_64 versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)-online-installer-x86_64-Build(?<patch>[0-9]+)\.(?<revision>[0-9]+)$ extractVersion=(^|/)Leap-(?<version>[^/]+)\.install\.iso$ registryUrl=https://download.opensuse.org/distribution/leap/16.0/offline/
   opensuseleap16_version = "16.0-online-installer-x86_64-Build171.1"
 }
@@ -61,17 +59,6 @@ source "qemu" "opensuse" {
 }
 
 build {
-  source "qemu.opensuse" {
-    name = "opensuseleap156"
-    output_directory = "output-${source.name}"
-    iso_url = "https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-${local.opensuseleap156_version}-Media.iso"
-    iso_checksum = "file:https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-${local.opensuseleap156_version}-Media.iso.sha256"
-    boot_command = local.autoyast_boot_command
-    http_content = {
-      "/opensuse.xml" = templatefile("${path.root}/opensuse.xml", { path = path, hostname = source.name, product = "Leap", security = "apparmor" })
-    }
-  }
-
   source "qemu.opensuse" {
     name = "opensuseleap16"
     output_directory = "output-${source.name}"
