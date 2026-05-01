@@ -1,6 +1,6 @@
 locals {
   # renovate: datasource=custom.html depName=archlinux-iso versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://geo.mirror.pkgbuild.com/iso/
-  archlinux_version = "2026.04.01"
+  archlinux_version = "2026.05.01"
 }
 
 source "qemu" "archlinux" {
