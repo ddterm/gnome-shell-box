@@ -7,7 +7,7 @@ packer {
     }
     vagrant = {
       # renovate: datasource=github-tags depName=hashicorp/packer-plugin-vagrant versioning=hashicorp
-      version = "=1.1.6"
+      version = "1.1.7"
       source = "github.com/hashicorp/vagrant"
     }
     external = {
