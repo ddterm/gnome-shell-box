@@ -36,8 +36,8 @@ build {
   source "qemu.ubuntu" {
     name = "ubuntu2404"
     output_directory = "output-${source.name}"
-    iso_url = "https://releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
-    iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
+    iso_url = "https://azure.releases.ubuntu.com/${local.ubuntu2404_version}/ubuntu-${local.ubuntu2404_version}-desktop-amd64.iso"
+    iso_checksum = "file:https://azure.releases.ubuntu.com/${local.ubuntu2404_version}/SHA256SUMS"
     http_content = {
       "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
     }
