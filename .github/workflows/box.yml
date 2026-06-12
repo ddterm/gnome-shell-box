@@ -45,7 +45,7 @@ defaults:
 jobs:
   build:
     name: build ${{ inputs.name }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
 
     steps:
@@ -70,6 +70,7 @@ jobs:
       - run: /usr/bin/packer init .
         env:
           PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TMPDIR: ${{ runner.temp }}
 
       - run: >-
           /usr/bin/packer build
@@ -83,6 +84,7 @@ jobs:
           PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKER_LOG: 1
           BUILD_NAME: qemu.${{ inputs.name }}
+          TMPDIR: ${{ runner.temp }}
 
       - run: du -h ./*.box
       - run: mv ./*.box "${BOX_NAME}"
@@ -104,7 +106,7 @@ jobs:
   test:
     name: test ${{ inputs.name }}
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
 
     env:
@@ -129,6 +131,7 @@ jobs:
           qemu-system-modules-spice
           qemu-utils
           libvirt-daemon-system
+          libvirt-daemon-driver-interface
           libvirt-dev
           dnsmasq
           imagemagick
