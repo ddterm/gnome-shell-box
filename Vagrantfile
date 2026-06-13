@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
 
     libvirt.nvram = File.join(box_dir, 'efivars.fd')
     libvirt.loader = File.join(box_dir, 'OVMF_CODE.4m.fd')
-    libvirt.machine_type = 'pc-q35-8.2'
+    libvirt.machine_type = 'pc-q35-10.0'
   end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true

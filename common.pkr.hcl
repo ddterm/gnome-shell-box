@@ -26,7 +26,7 @@ variable "headless" {
 
 variable "machine_type" {
   type = string
-  default = "pc-q35-8.2"
+  default = "pc-q35-10.0"
   description = "QEMU machine type"
 }
 
