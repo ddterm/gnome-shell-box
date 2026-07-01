@@ -63,7 +63,7 @@ build {
     name = "opensuseleap16"
     output_directory = "output-${source.name}"
     iso_url = "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-${local.opensuseleap16_version}.install.iso"
-    iso_checksum = "file:https://download.opensuse.org/distribution/leap/16.0/offline/Leap-${local.opensuseleap16_version}.install.iso.sha256"
+    iso_checksum = "file:https://download.opensuse.org/distribution/leap/16.0/offline/Leap-${local.opensuseleap16_version}.install.iso.sha512"
     boot_command = local.agama_boot_command
     boot_wait = "9s"
     http_content = {
