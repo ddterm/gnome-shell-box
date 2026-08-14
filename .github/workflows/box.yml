@@ -46,7 +46,7 @@ jobs:
   build:
     name: build ${{ inputs.name }}
     runs-on: ubuntu-26.04
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -62,6 +62,7 @@ jobs:
           qemu-system-modules-spice
           qemu-utils
           dnsmasq
+          python3-qemu-qmp
 
       - uses: $/.github/actions/clean
       - uses: $/.github/actions/enable-kvm
@@ -72,10 +73,13 @@ jobs:
           PACKER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TMPDIR: ${{ runner.temp }}
 
-      - run: >-
+      - id: build
+        timeout-minutes: 45
+        run: >-
           /usr/bin/packer build
           ${{ case(inputs.publish, '', '-except vagrant-registry') }}
           -only "$BUILD_NAME"
+          -on-error=abort
           .
           2>&1 | tee logs/packer.txt
         env:
@@ -85,6 +89,12 @@ jobs:
           PACKER_LOG: 1
           BUILD_NAME: qemu.${{ inputs.name }}
           TMPDIR: ${{ runner.temp }}
+
+      - if: always() && steps.build.outcome != 'success' && steps.build.outcome != 'skipped'
+        run: |
+          echo 'screendump filename=logs/screen.png format=png' | qmp-shell -v output-*/*.monitor
+          # There is no way to run a command on boot/ssh timeout in Packer.
+          # So it has to be done in this ugly way.
 
       - run: du -h ./*.box
       - run: mv ./*.box "${BOX_NAME}"
