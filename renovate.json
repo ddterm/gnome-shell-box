@@ -1,22 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "customManagers:githubActionsVersions"
+    "config:recommended"
   ],
   "customDatasources": {
     "html": {
       "format": "html"
+    },
+    "github-release-assets": {
+      "transformTemplates": [
+        "{'releases':$[draft=false].{'version':$replace(tag_name,/^v/,''),'isStable':$not(prerelease),'digest':assets[$contains(name,{{{packageName}}})][0].digest.($?$replace(/^sha256:/,''):undefined),'releaseTimestamp':published_at}}"
+      ]
     }
   },
   "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "*.pkr.hcl"
+        "*.pkr.hcl",
+        ".github/workflows/{box,ci,code-scan}.yml"
       ],
       "matchStrings": [
-        "#\\s*renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?( registryUrl=(?<registryUrl>.*?))?\\s.*?\\s*=\\s*\"(?<currentValue>.*)\""
+        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+(lookupName|packageName)=(?<packageName>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\n\\s*\\w+\\s*[:=]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?(\\s|$)",
+        "#\\s*renovate-digest:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s+currentValue=(?<currentValue>\\S+)(\\s+(lookupName|packageName)=(?<packageName>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\n\\s*\\w+\\s*[:=]\\s*[\"']?(?<currentDigest>[^\\s\"']+)[\"']?(\\s|$)"
       ]
     }
   ],
