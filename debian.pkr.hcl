@@ -1,6 +1,6 @@
 locals {
   # renovate: datasource=custom.html depName=debian-release extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://cdimage.debian.org/cdimage/release/
-  debian13_version = "13.6.0"
+  debian13_version = "13.7.0"
 }
 
 source "qemu" "debian" {
