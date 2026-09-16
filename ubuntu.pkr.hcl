@@ -1,6 +1,6 @@
 locals {
   # renovate: datasource=custom.html depName=ubuntu-release versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
-  ubuntu2404_version = "24.04.5"
+  ubuntu2404_version = "24.04.5.1"
   # renovate: datasource=custom.html depName=ubuntu-release versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
   ubuntu2604_version = "26.04.1"
 }
