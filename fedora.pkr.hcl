@@ -75,6 +75,16 @@ build {
     }
   }
 
+  source "qemu.fedora" {
+    name = "fedora45"
+    output_directory = "output-${source.name}"
+    iso_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/test/45_Beta/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-45_Beta-1.3.iso"
+    iso_checksum = "file:https://dl.fedoraproject.org/pub/fedora/linux/releases/test/45_Beta/Everything/x86_64/iso/Fedora-Everything-iso-45_Beta-1.3-x86_64-CHECKSUM"
+    http_content = {
+      "/fedora.ks" = templatefile("${path.root}/fedora.ks", { path = path, hostname = source.name })
+    }
+  }
+
   post-processors {
     post-processor "vagrant" {
       vagrantfile_template = "Vagrantfile"
