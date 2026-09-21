@@ -10,7 +10,7 @@ concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 jobs:
   ci:
-    uses: ./.github/workflows/ci.yml
+    uses: $/.github/workflows/ci.yml
     secrets: inherit
     with:
       publish: true

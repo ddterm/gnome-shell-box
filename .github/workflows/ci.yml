@@ -41,8 +41,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
 
-      - uses: ./.github/actions/setup-hashicorp-repo
+      - uses: $/.github/actions/setup-hashicorp-repo
       - run: sudo apt-get install -y --no-install-recommends "packer=$PACKER_VERSION"
 
       - id: inspect
@@ -55,7 +56,7 @@ jobs:
       matrix:
         build: ${{ fromJSON(needs.setup.outputs.builds) }}
 
-    uses: ./.github/workflows/box.yml
+    uses: $/.github/workflows/box.yml
     secrets: inherit
     with:
       name: ${{ matrix.build }}
