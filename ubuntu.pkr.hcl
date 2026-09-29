@@ -51,6 +51,16 @@ build {
     }
   }
 
+  source "qemu.ubuntu" {
+    name = "ubuntu2610"
+    output_directory = "output-${source.name}"
+    iso_url = "https://cdimage.ubuntu.com/ubuntu/releases/26.10/release/snapshot-4/ubuntu-26.10-snapshot4-desktop-amd64.iso"
+    iso_checksum = "file:https://cdimage.ubuntu.com/ubuntu/releases/26.10/release/snapshot-4/SHA256SUMS"
+    http_content = {
+      "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
+    }
+  }
+
   provisioner "shell" {
     inline = [
       "sudo apt-get clean -y",
