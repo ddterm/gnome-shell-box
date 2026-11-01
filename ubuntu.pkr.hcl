@@ -3,6 +3,8 @@ locals {
   ubuntu2404_version = "24.04.5.1"
   # renovate: datasource=custom.html depName=ubuntu-release versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
   ubuntu2604_version = "26.04.1"
+  # renovate: datasource=custom.html depName=ubuntu-release versioning=loose extractVersion=(^|/)(?<version>[0-9.]+)/$ registryUrl=https://releases.ubuntu.com/
+  ubuntu2610_version = "26.10"
 }
 
 source "qemu" "ubuntu" {
@@ -54,8 +56,8 @@ build {
   source "qemu.ubuntu" {
     name = "ubuntu2610"
     output_directory = "output-${source.name}"
-    iso_url = "https://cdimage.ubuntu.com/ubuntu/releases/26.10/release/snapshot-4/ubuntu-26.10-snapshot4-desktop-amd64.iso"
-    iso_checksum = "file:https://cdimage.ubuntu.com/ubuntu/releases/26.10/release/snapshot-4/SHA256SUMS"
+    iso_url = "https://releases.ubuntu.com/${local.ubuntu2610_version}/ubuntu-${local.ubuntu2610_version}-desktop-amd64.iso"
+    iso_checksum = "file:https://releases.ubuntu.com/${local.ubuntu2610_version}/SHA256SUMS"
     http_content = {
       "/ubuntu-autoinstall.yml" = templatefile("${path.root}/ubuntu-autoinstall.yml", { path = path, hostname = source.name })
     }
