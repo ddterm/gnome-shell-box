@@ -1,6 +1,6 @@
 locals {
-  # renovate: datasource=custom.html depName=openSUSE-Leap-16.0-online-installer-x86_64 versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)-online-installer-x86_64-Build(?<patch>[0-9]+)\.(?<revision>[0-9]+)$ extractVersion=(^|/)Leap-(?<version>[^/]+)\.install\.iso$ registryUrl=https://download.opensuse.org/distribution/leap/16.0/offline/
-  opensuseleap16_version = "16.0-online-installer-x86_64-Build178.27"
+  # renovate: datasource=custom.html depName=openSUSE-Leap-16.1-online-installer-x86_64 versioning=regex:^(?<major>[0-9]+)\.(?<minor>[0-9]+)-online-installer-x86_64-Build(?<patch>[0-9]+)\.(?<revision>[0-9]+)$ extractVersion=(^|/)Leap-(?<version>[^/]+)\.install\.iso$ registryUrl=https://download.opensuse.org/distribution/leap/16.1/offline/
+  opensuseleap16_version = "16.1-online-installer-x86_64-Build60.2"
 }
 
 data "http" "opensusetumbleweed_iso_checksum" {
@@ -62,8 +62,8 @@ build {
   source "qemu.opensuse" {
     name = "opensuseleap16"
     output_directory = "output-${source.name}"
-    iso_url = "https://download.opensuse.org/distribution/leap/16.0/offline/Leap-${local.opensuseleap16_version}.install.iso"
-    iso_checksum = "file:https://download.opensuse.org/distribution/leap/16.0/offline/Leap-${local.opensuseleap16_version}.install.iso.sha512"
+    iso_url = "https://download.opensuse.org/distribution/leap/16.1/offline/Leap-${local.opensuseleap16_version}.install.iso"
+    iso_checksum = "file:https://download.opensuse.org/distribution/leap/16.1/offline/Leap-${local.opensuseleap16_version}.install.iso.sha512"
     boot_command = local.agama_boot_command
     boot_wait = "9s"
     http_content = {
