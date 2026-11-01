@@ -92,13 +92,13 @@ jobs:
         env:
           BOX_NAME: ${{ inputs.name }}.box
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           path: ${{ inputs.name }}.box
           retention-days: 1
           archive: false
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: ${{ inputs.name }}-build-logs
           path: logs
@@ -180,19 +180,19 @@ jobs:
           SCREENSHOT: logs/${{ inputs.name }}.png
           SCREENSHOT_DIFF: logs/${{ inputs.name }}-diff.png
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           path: logs/${{ inputs.name }}.png
           archive: false
         if: ${{ always() && steps.screenshot.outcome == 'success' }}
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           path: logs/${{ inputs.name }}-diff.png
           archive: false
         if: ${{ always() && steps.screenshot.outcome == 'success' }}
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: ${{ inputs.name }}-test-logs
           path: logs
