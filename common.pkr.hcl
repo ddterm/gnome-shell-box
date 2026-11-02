@@ -2,7 +2,7 @@ packer {
   required_plugins {
     qemu = {
       # renovate: datasource=github-tags depName=hashicorp/packer-plugin-qemu versioning=hashicorp
-      version = "1.1.7"
+      version = "1.1.8"
       source  = "github.com/hashicorp/qemu"
     }
     vagrant = {
